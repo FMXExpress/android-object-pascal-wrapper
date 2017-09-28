@@ -9,7 +9,6 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   Androidapi.JNI.os,
-  java.net.Socket,
   java.net.DatagramSocket;
 
 type

@@ -11,10 +11,10 @@ uses
   java.util.concurrent.Callable,
   java.util.concurrent.TimeUnit,
   java.util.concurrent.ForkJoinPool_ManagedBlocker,
-  java.util.concurrent.RunnableFuture,
-  java.util.concurrent.ForkJoinWorkerThread;
+  java.util.concurrent.RunnableFuture;
 
 type
+  JForkJoinWorkerThread = interface; // merged
   JForkJoinTask = interface; // merged
   JForkJoinPool_ForkJoinWorkerThreadFactory = interface; // merged
   JForkJoinPool = interface;
@@ -156,6 +156,26 @@ type
   end;
 
   TJForkJoinTask = class(TJavaGenericImport<JForkJoinTaskClass, JForkJoinTask>)
+  end;
+
+
+  // Merged from: .\java.util.concurrent.ForkJoinWorkerThread.pas
+  JForkJoinWorkerThreadClass = interface(JObjectClass)
+    ['{13963C85-E8F5-4245-A7C4-60E782295140}']
+    function getPool : JForkJoinPool; cdecl;                                    // ()Ljava/util/concurrent/ForkJoinPool; A: $1
+    function getPoolIndex : Integer; cdecl;                                     // ()I A: $1
+    procedure run ; cdecl;                                                      // ()V A: $1
+  end;
+
+  [JavaSignature('java/util/concurrent/ForkJoinWorkerThread')]
+  JForkJoinWorkerThread = interface(JObject)
+    ['{B835CDCF-AD59-4DC7-BA66-077DF978193A}']
+    function getPool : JForkJoinPool; cdecl;                                    // ()Ljava/util/concurrent/ForkJoinPool; A: $1
+    function getPoolIndex : Integer; cdecl;                                     // ()I A: $1
+    procedure run ; cdecl;                                                      // ()V A: $1
+  end;
+
+  TJForkJoinWorkerThread = class(TJavaGenericImport<JForkJoinWorkerThreadClass, JForkJoinWorkerThread>)
   end;
 
 

@@ -12,7 +12,7 @@ uses
   java.security.KeyStore,
   java.security.SecureRandom,
   org.apache.http.conn.scheme.HostNameResolver,
-  java.net.Socket,
+  java.net.DatagramSocket,
   java.net.InetAddress,
   org.apache.http.params.HttpParams;
 

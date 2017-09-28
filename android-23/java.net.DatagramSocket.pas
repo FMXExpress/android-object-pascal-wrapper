@@ -13,10 +13,25 @@ uses
   java.net.SocketAddress,
   java.net.DatagramPacket,
   java.net.DatagramSocketImplFactory,
-  java.nio.channels.spi.AbstractSelector,
-  java.nio.ByteBuffer;
+  java.nio.ByteBuffer,
+  java.nio.channels.spi.AbstractSelectionKey,
+  java.nio.channels.Pipe,
+  java.nio.channels.Channel,
+  java.net.SocketImplFactory,
+  java.net.Proxy,
+  java.net.SocketImpl;
 
 type
+  JSelector = interface; // merged
+  JSocketChannel = interface; // merged
+  JSocket = interface; // merged
+  JServerSocketChannel = interface; // merged
+  JServerSocket = interface; // merged
+  JAbstractSelectableChannel = interface; // merged
+  JSelectionKey = interface; // merged
+  JSelectableChannel = interface; // merged
+  JSelectorProvider = interface; // merged
+  JAbstractSelector = interface; // merged
   JDatagramChannel = interface; // merged
   JDatagramSocket = interface;
 
@@ -124,6 +139,391 @@ type
 
   TJDatagramChannel = class(TJavaGenericImport<JDatagramChannelClass, JDatagramChannel>)
   end;
+
+
+  // Merged from: .\java.nio.channels.spi.AbstractSelector.pas
+  JAbstractSelectorClass = interface(JObjectClass)
+    ['{6AFA980F-4908-4984-B91B-09B2FC1C4987}']
+    function isOpen : boolean; cdecl;                                           // ()Z A: $11
+    function provider : JSelectorProvider; cdecl;                               // ()Ljava/nio/channels/spi/SelectorProvider; A: $11
+    procedure close ; cdecl;                                                    // ()V A: $11
+  end;
+
+  [JavaSignature('java/nio/channels/spi/AbstractSelector')]
+  JAbstractSelector = interface(JObject)
+    ['{3EFD41F4-0037-41A7-AAF2-F17C3A8EAC23}']
+  end;
+
+  TJAbstractSelector = class(TJavaGenericImport<JAbstractSelectorClass, JAbstractSelector>)
+  end;
+
+  // Merged from: .\java.nio.channels.spi.SelectorProvider.pas
+  JSelectorProviderClass = interface(JObjectClass)
+    ['{50CBE1BE-8677-4075-A315-D687F498A5C5}']
+    function inheritedChannel : JChannel; cdecl;                                // ()Ljava/nio/channels/Channel; A: $1
+    function openDatagramChannel : JDatagramChannel; cdecl;                     // ()Ljava/nio/channels/DatagramChannel; A: $401
+    function openPipe : JPipe; cdecl;                                           // ()Ljava/nio/channels/Pipe; A: $401
+    function openSelector : JAbstractSelector; cdecl;                           // ()Ljava/nio/channels/spi/AbstractSelector; A: $401
+    function openServerSocketChannel : JServerSocketChannel; cdecl;             // ()Ljava/nio/channels/ServerSocketChannel; A: $401
+    function openSocketChannel : JSocketChannel; cdecl;                         // ()Ljava/nio/channels/SocketChannel; A: $401
+    function provider : JSelectorProvider; cdecl;                               // ()Ljava/nio/channels/spi/SelectorProvider; A: $29
+  end;
+
+  [JavaSignature('java/nio/channels/spi/SelectorProvider')]
+  JSelectorProvider = interface(JObject)
+    ['{FFFF2213-E4A2-499B-B38B-88D953D2D17E}']
+    function inheritedChannel : JChannel; cdecl;                                // ()Ljava/nio/channels/Channel; A: $1
+    function openDatagramChannel : JDatagramChannel; cdecl;                     // ()Ljava/nio/channels/DatagramChannel; A: $401
+    function openPipe : JPipe; cdecl;                                           // ()Ljava/nio/channels/Pipe; A: $401
+    function openSelector : JAbstractSelector; cdecl;                           // ()Ljava/nio/channels/spi/AbstractSelector; A: $401
+    function openServerSocketChannel : JServerSocketChannel; cdecl;             // ()Ljava/nio/channels/ServerSocketChannel; A: $401
+    function openSocketChannel : JSocketChannel; cdecl;                         // ()Ljava/nio/channels/SocketChannel; A: $401
+  end;
+
+  TJSelectorProvider = class(TJavaGenericImport<JSelectorProviderClass, JSelectorProvider>)
+  end;
+
+
+
+  // Merged from: .\java.nio.channels.SelectableChannel.pas
+  JSelectableChannelClass = interface(JObjectClass)
+    ['{5BB30688-07B2-44E2-8D74-7703DD4125B5}']
+    function &register(JSelectorparam0 : JSelector; Integerparam1 : Integer; JObjectparam2 : JObject) : JSelectionKey; cdecl; overload;// (Ljava/nio/channels/Selector;ILjava/lang/Object;)Ljava/nio/channels/SelectionKey; A: $401
+    function &register(selector : JSelector; operations : Integer) : JSelectionKey; cdecl; overload;// (Ljava/nio/channels/Selector;I)Ljava/nio/channels/SelectionKey; A: $11
+    function blockingLock : JObject; cdecl;                                     // ()Ljava/lang/Object; A: $401
+    function configureBlocking(booleanparam0 : boolean) : JSelectableChannel; cdecl;// (Z)Ljava/nio/channels/SelectableChannel; A: $401
+    function isBlocking : boolean; cdecl;                                       // ()Z A: $401
+    function isRegistered : boolean; cdecl;                                     // ()Z A: $401
+    function keyFor(JSelectorparam0 : JSelector) : JSelectionKey; cdecl;        // (Ljava/nio/channels/Selector;)Ljava/nio/channels/SelectionKey; A: $401
+    function provider : JSelectorProvider; cdecl;                               // ()Ljava/nio/channels/spi/SelectorProvider; A: $401
+    function validOps : Integer; cdecl;                                         // ()I A: $401
+  end;
+
+  [JavaSignature('java/nio/channels/SelectableChannel')]
+  JSelectableChannel = interface(JObject)
+    ['{E0A95C34-BAC7-4698-86B5-DC87A4302EA8}']
+    function &register(JSelectorparam0 : JSelector; Integerparam1 : Integer; JObjectparam2 : JObject) : JSelectionKey; cdecl; overload;// (Ljava/nio/channels/Selector;ILjava/lang/Object;)Ljava/nio/channels/SelectionKey; A: $401
+    function blockingLock : JObject; cdecl;                                     // ()Ljava/lang/Object; A: $401
+    function configureBlocking(booleanparam0 : boolean) : JSelectableChannel; cdecl;// (Z)Ljava/nio/channels/SelectableChannel; A: $401
+    function isBlocking : boolean; cdecl;                                       // ()Z A: $401
+    function isRegistered : boolean; cdecl;                                     // ()Z A: $401
+    function keyFor(JSelectorparam0 : JSelector) : JSelectionKey; cdecl;        // (Ljava/nio/channels/Selector;)Ljava/nio/channels/SelectionKey; A: $401
+    function provider : JSelectorProvider; cdecl;                               // ()Ljava/nio/channels/spi/SelectorProvider; A: $401
+    function validOps : Integer; cdecl;                                         // ()I A: $401
+  end;
+
+  TJSelectableChannel = class(TJavaGenericImport<JSelectableChannelClass, JSelectableChannel>)
+  end;
+
+  // Merged from: .\java.nio.channels.SelectionKey.pas
+  JSelectionKeyClass = interface(JObjectClass)
+    ['{C5EDCC34-0DB9-46BB-9F6C-53627AC6B6AE}']
+    function _GetOP_ACCEPT : Integer; cdecl;                                    //  A: $19
+    function _GetOP_CONNECT : Integer; cdecl;                                   //  A: $19
+    function _GetOP_READ : Integer; cdecl;                                      //  A: $19
+    function _GetOP_WRITE : Integer; cdecl;                                     //  A: $19
+    function attach(anObject : JObject) : JObject; cdecl;                       // (Ljava/lang/Object;)Ljava/lang/Object; A: $11
+    function attachment : JObject; cdecl;                                       // ()Ljava/lang/Object; A: $11
+    function channel : JSelectableChannel; cdecl;                               // ()Ljava/nio/channels/SelectableChannel; A: $401
+    function interestOps : Integer; cdecl; overload;                            // ()I A: $401
+    function interestOps(Integerparam0 : Integer) : JSelectionKey; cdecl; overload;// (I)Ljava/nio/channels/SelectionKey; A: $401
+    function isAcceptable : boolean; cdecl;                                     // ()Z A: $11
+    function isConnectable : boolean; cdecl;                                    // ()Z A: $11
+    function isReadable : boolean; cdecl;                                       // ()Z A: $11
+    function isValid : boolean; cdecl;                                          // ()Z A: $401
+    function isWritable : boolean; cdecl;                                       // ()Z A: $11
+    function readyOps : Integer; cdecl;                                         // ()I A: $401
+    function selector : JSelector; cdecl;                                       // ()Ljava/nio/channels/Selector; A: $401
+    procedure cancel ; cdecl;                                                   // ()V A: $401
+    property OP_ACCEPT : Integer read _GetOP_ACCEPT;                            // I A: $19
+    property OP_CONNECT : Integer read _GetOP_CONNECT;                          // I A: $19
+    property OP_READ : Integer read _GetOP_READ;                                // I A: $19
+    property OP_WRITE : Integer read _GetOP_WRITE;                              // I A: $19
+  end;
+
+  [JavaSignature('java/nio/channels/SelectionKey')]
+  JSelectionKey = interface(JObject)
+    ['{790F76E4-441C-49E8-8B8D-078B4A040D30}']
+    function channel : JSelectableChannel; cdecl;                               // ()Ljava/nio/channels/SelectableChannel; A: $401
+    function interestOps : Integer; cdecl; overload;                            // ()I A: $401
+    function interestOps(Integerparam0 : Integer) : JSelectionKey; cdecl; overload;// (I)Ljava/nio/channels/SelectionKey; A: $401
+    function isValid : boolean; cdecl;                                          // ()Z A: $401
+    function readyOps : Integer; cdecl;                                         // ()I A: $401
+    function selector : JSelector; cdecl;                                       // ()Ljava/nio/channels/Selector; A: $401
+    procedure cancel ; cdecl;                                                   // ()V A: $401
+  end;
+
+  TJSelectionKey = class(TJavaGenericImport<JSelectionKeyClass, JSelectionKey>)
+  end;
+
+  // Merged from: .\java.nio.channels.spi.AbstractSelectableChannel.pas
+  JAbstractSelectableChannelClass = interface(JObjectClass)
+    ['{861AD326-006E-48D8-98F9-40B69BC5B6C6}']
+    function &register(selector : JSelector; interestSet : Integer; attachment : JObject) : JSelectionKey; cdecl;// (Ljava/nio/channels/Selector;ILjava/lang/Object;)Ljava/nio/channels/SelectionKey; A: $11
+    function blockingLock : JObject; cdecl;                                     // ()Ljava/lang/Object; A: $11
+    function configureBlocking(blockingMode : boolean) : JSelectableChannel; cdecl;// (Z)Ljava/nio/channels/SelectableChannel; A: $11
+    function isBlocking : boolean; cdecl;                                       // ()Z A: $11
+    function isRegistered : boolean; cdecl;                                     // ()Z A: $31
+    function keyFor(selector : JSelector) : JSelectionKey; cdecl;               // (Ljava/nio/channels/Selector;)Ljava/nio/channels/SelectionKey; A: $31
+    function provider : JSelectorProvider; cdecl;                               // ()Ljava/nio/channels/spi/SelectorProvider; A: $11
+  end;
+
+  [JavaSignature('java/nio/channels/spi/AbstractSelectableChannel')]
+  JAbstractSelectableChannel = interface(JObject)
+    ['{C3CA4769-F351-4D13-86AF-09F1E7FF3C9C}']
+  end;
+
+  TJAbstractSelectableChannel = class(TJavaGenericImport<JAbstractSelectableChannelClass, JAbstractSelectableChannel>)
+  end;
+
+
+  // Merged from: .\java.net.ServerSocket.pas
+  JServerSocketClass = interface(JObjectClass)
+    ['{66E46F39-B451-4B2B-81DA-567465505331}']
+    function accept : JSocket; cdecl;                                           // ()Ljava/net/Socket; A: $1
+    function getChannel : JServerSocketChannel; cdecl;                          // ()Ljava/nio/channels/ServerSocketChannel; A: $1
+    function getInetAddress : JInetAddress; cdecl;                              // ()Ljava/net/InetAddress; A: $1
+    function getLocalPort : Integer; cdecl;                                     // ()I A: $1
+    function getLocalSocketAddress : JSocketAddress; cdecl;                     // ()Ljava/net/SocketAddress; A: $1
+    function getReceiveBufferSize : Integer; cdecl;                             // ()I A: $1
+    function getReuseAddress : boolean; cdecl;                                  // ()Z A: $1
+    function getSoTimeout : Integer; cdecl;                                     // ()I A: $21
+    function init : JServerSocket; cdecl; overload;                             // ()V A: $1
+    function init(port : Integer) : JServerSocket; cdecl; overload;             // (I)V A: $1
+    function init(port : Integer; backlog : Integer) : JServerSocket; cdecl; overload;// (II)V A: $1
+    function init(port : Integer; backlog : Integer; localAddress : JInetAddress) : JServerSocket; cdecl; overload;// (IILjava/net/InetAddress;)V A: $1
+    function isBound : boolean; cdecl;                                          // ()Z A: $1
+    function isClosed : boolean; cdecl;                                         // ()Z A: $1
+    function toString : JString; cdecl;                                         // ()Ljava/lang/String; A: $1
+    procedure bind(localAddr : JSocketAddress) ; cdecl; overload;               // (Ljava/net/SocketAddress;)V A: $1
+    procedure bind(localAddr : JSocketAddress; backlog : Integer) ; cdecl; overload;// (Ljava/net/SocketAddress;I)V A: $1
+    procedure close ; cdecl;                                                    // ()V A: $1
+    procedure setPerformancePreferences(connectionTime : Integer; latency : Integer; bandwidth : Integer) ; cdecl;// (III)V A: $1
+    procedure setReceiveBufferSize(size : Integer) ; cdecl;                     // (I)V A: $1
+    procedure setReuseAddress(reuse : boolean) ; cdecl;                         // (Z)V A: $1
+    procedure setSoTimeout(timeout : Integer) ; cdecl;                          // (I)V A: $21
+    procedure setSocketFactory(aFactory : JSocketImplFactory) ; cdecl;          // (Ljava/net/SocketImplFactory;)V A: $29
+  end;
+
+  [JavaSignature('java/net/ServerSocket')]
+  JServerSocket = interface(JObject)
+    ['{72A48F63-C466-4746-8160-B13FC7A1D908}']
+    function accept : JSocket; cdecl;                                           // ()Ljava/net/Socket; A: $1
+    function getChannel : JServerSocketChannel; cdecl;                          // ()Ljava/nio/channels/ServerSocketChannel; A: $1
+    function getInetAddress : JInetAddress; cdecl;                              // ()Ljava/net/InetAddress; A: $1
+    function getLocalPort : Integer; cdecl;                                     // ()I A: $1
+    function getLocalSocketAddress : JSocketAddress; cdecl;                     // ()Ljava/net/SocketAddress; A: $1
+    function getReceiveBufferSize : Integer; cdecl;                             // ()I A: $1
+    function getReuseAddress : boolean; cdecl;                                  // ()Z A: $1
+    function isBound : boolean; cdecl;                                          // ()Z A: $1
+    function isClosed : boolean; cdecl;                                         // ()Z A: $1
+    function toString : JString; cdecl;                                         // ()Ljava/lang/String; A: $1
+    procedure bind(localAddr : JSocketAddress) ; cdecl; overload;               // (Ljava/net/SocketAddress;)V A: $1
+    procedure bind(localAddr : JSocketAddress; backlog : Integer) ; cdecl; overload;// (Ljava/net/SocketAddress;I)V A: $1
+    procedure close ; cdecl;                                                    // ()V A: $1
+    procedure setPerformancePreferences(connectionTime : Integer; latency : Integer; bandwidth : Integer) ; cdecl;// (III)V A: $1
+    procedure setReceiveBufferSize(size : Integer) ; cdecl;                     // (I)V A: $1
+    procedure setReuseAddress(reuse : boolean) ; cdecl;                         // (Z)V A: $1
+  end;
+
+  TJServerSocket = class(TJavaGenericImport<JServerSocketClass, JServerSocket>)
+  end;
+
+  // Merged from: .\java.nio.channels.ServerSocketChannel.pas
+  JServerSocketChannelClass = interface(JObjectClass)
+    ['{C39E3E55-DC33-434B-8CB1-61A1CB38A442}']
+    function accept : JSocketChannel; cdecl;                                    // ()Ljava/nio/channels/SocketChannel; A: $401
+    function open : JServerSocketChannel; cdecl;                                // ()Ljava/nio/channels/ServerSocketChannel; A: $9
+    function socket : JServerSocket; cdecl;                                     // ()Ljava/net/ServerSocket; A: $401
+    function validOps : Integer; cdecl;                                         // ()I A: $11
+  end;
+
+  [JavaSignature('java/nio/channels/ServerSocketChannel')]
+  JServerSocketChannel = interface(JObject)
+    ['{6D474514-CE52-4C1D-8E3E-228E29454BCD}']
+    function accept : JSocketChannel; cdecl;                                    // ()Ljava/nio/channels/SocketChannel; A: $401
+    function socket : JServerSocket; cdecl;                                     // ()Ljava/net/ServerSocket; A: $401
+  end;
+
+  TJServerSocketChannel = class(TJavaGenericImport<JServerSocketChannelClass, JServerSocketChannel>)
+  end;
+
+
+
+  // Merged from: .\java.net.Socket.pas
+  JSocketClass = interface(JObjectClass)
+    ['{3398FFA3-07F2-4585-A560-879441A3DF50}']
+    function getChannel : JSocketChannel; cdecl;                                // ()Ljava/nio/channels/SocketChannel; A: $1
+    function getInetAddress : JInetAddress; cdecl;                              // ()Ljava/net/InetAddress; A: $1
+    function getInputStream : JInputStream; cdecl;                              // ()Ljava/io/InputStream; A: $1
+    function getKeepAlive : boolean; cdecl;                                     // ()Z A: $1
+    function getLocalAddress : JInetAddress; cdecl;                             // ()Ljava/net/InetAddress; A: $1
+    function getLocalPort : Integer; cdecl;                                     // ()I A: $1
+    function getLocalSocketAddress : JSocketAddress; cdecl;                     // ()Ljava/net/SocketAddress; A: $1
+    function getOOBInline : boolean; cdecl;                                     // ()Z A: $1
+    function getOutputStream : JOutputStream; cdecl;                            // ()Ljava/io/OutputStream; A: $1
+    function getPort : Integer; cdecl;                                          // ()I A: $1
+    function getReceiveBufferSize : Integer; cdecl;                             // ()I A: $21
+    function getRemoteSocketAddress : JSocketAddress; cdecl;                    // ()Ljava/net/SocketAddress; A: $1
+    function getReuseAddress : boolean; cdecl;                                  // ()Z A: $1
+    function getSendBufferSize : Integer; cdecl;                                // ()I A: $21
+    function getSoLinger : Integer; cdecl;                                      // ()I A: $1
+    function getSoTimeout : Integer; cdecl;                                     // ()I A: $21
+    function getTcpNoDelay : boolean; cdecl;                                    // ()Z A: $1
+    function getTrafficClass : Integer; cdecl;                                  // ()I A: $1
+    function init : JSocket; cdecl; overload;                                   // ()V A: $1
+    function init(addr : JInetAddress; port : Integer; streaming : boolean) : JSocket; deprecated; cdecl; overload;// (Ljava/net/InetAddress;IZ)V A: $1
+    function init(dstAddress : JInetAddress; dstPort : Integer) : JSocket; cdecl; overload;// (Ljava/net/InetAddress;I)V A: $1
+    function init(dstAddress : JInetAddress; dstPort : Integer; localAddress : JInetAddress; localPort : Integer) : JSocket; cdecl; overload;// (Ljava/net/InetAddress;ILjava/net/InetAddress;I)V A: $1
+    function init(dstName : JString; dstPort : Integer) : JSocket; cdecl; overload;// (Ljava/lang/String;I)V A: $1
+    function init(dstName : JString; dstPort : Integer; localAddress : JInetAddress; localPort : Integer) : JSocket; cdecl; overload;// (Ljava/lang/String;ILjava/net/InetAddress;I)V A: $1
+    function init(hostName : JString; port : Integer; streaming : boolean) : JSocket; deprecated; cdecl; overload;// (Ljava/lang/String;IZ)V A: $1
+    function init(proxy : JProxy) : JSocket; cdecl; overload;                   // (Ljava/net/Proxy;)V A: $1
+    function isBound : boolean; cdecl;                                          // ()Z A: $1
+    function isClosed : boolean; cdecl;                                         // ()Z A: $1
+    function isConnected : boolean; cdecl;                                      // ()Z A: $1
+    function isInputShutdown : boolean; cdecl;                                  // ()Z A: $1
+    function isOutputShutdown : boolean; cdecl;                                 // ()Z A: $1
+    function toString : JString; cdecl;                                         // ()Ljava/lang/String; A: $1
+    procedure bind(localAddr : JSocketAddress) ; cdecl;                         // (Ljava/net/SocketAddress;)V A: $1
+    procedure close ; cdecl;                                                    // ()V A: $21
+    procedure connect(remoteAddr : JSocketAddress) ; cdecl; overload;           // (Ljava/net/SocketAddress;)V A: $1
+    procedure connect(remoteAddr : JSocketAddress; timeout : Integer) ; cdecl; overload;// (Ljava/net/SocketAddress;I)V A: $1
+    procedure sendUrgentData(value : Integer) ; cdecl;                          // (I)V A: $1
+    procedure setKeepAlive(keepAlive : boolean) ; cdecl;                        // (Z)V A: $1
+    procedure setOOBInline(oobinline : boolean) ; cdecl;                        // (Z)V A: $1
+    procedure setPerformancePreferences(connectionTime : Integer; latency : Integer; bandwidth : Integer) ; cdecl;// (III)V A: $1
+    procedure setReceiveBufferSize(size : Integer) ; cdecl;                     // (I)V A: $21
+    procedure setReuseAddress(reuse : boolean) ; cdecl;                         // (Z)V A: $1
+    procedure setSendBufferSize(size : Integer) ; cdecl;                        // (I)V A: $21
+    procedure setSoLinger(on : boolean; timeout : Integer) ; cdecl;             // (ZI)V A: $1
+    procedure setSoTimeout(timeout : Integer) ; cdecl;                          // (I)V A: $21
+    procedure setSocketImplFactory(fac : JSocketImplFactory) ; cdecl;           // (Ljava/net/SocketImplFactory;)V A: $29
+    procedure setTcpNoDelay(on : boolean) ; cdecl;                              // (Z)V A: $1
+    procedure setTrafficClass(value : Integer) ; cdecl;                         // (I)V A: $1
+    procedure shutdownInput ; cdecl;                                            // ()V A: $1
+    procedure shutdownOutput ; cdecl;                                           // ()V A: $1
+  end;
+
+  [JavaSignature('java/net/Socket')]
+  JSocket = interface(JObject)
+    ['{01F2C3A5-2E85-41E5-94BD-5EDA92DAF394}']
+    function getChannel : JSocketChannel; cdecl;                                // ()Ljava/nio/channels/SocketChannel; A: $1
+    function getInetAddress : JInetAddress; cdecl;                              // ()Ljava/net/InetAddress; A: $1
+    function getInputStream : JInputStream; cdecl;                              // ()Ljava/io/InputStream; A: $1
+    function getKeepAlive : boolean; cdecl;                                     // ()Z A: $1
+    function getLocalAddress : JInetAddress; cdecl;                             // ()Ljava/net/InetAddress; A: $1
+    function getLocalPort : Integer; cdecl;                                     // ()I A: $1
+    function getLocalSocketAddress : JSocketAddress; cdecl;                     // ()Ljava/net/SocketAddress; A: $1
+    function getOOBInline : boolean; cdecl;                                     // ()Z A: $1
+    function getOutputStream : JOutputStream; cdecl;                            // ()Ljava/io/OutputStream; A: $1
+    function getPort : Integer; cdecl;                                          // ()I A: $1
+    function getRemoteSocketAddress : JSocketAddress; cdecl;                    // ()Ljava/net/SocketAddress; A: $1
+    function getReuseAddress : boolean; cdecl;                                  // ()Z A: $1
+    function getSoLinger : Integer; cdecl;                                      // ()I A: $1
+    function getTcpNoDelay : boolean; cdecl;                                    // ()Z A: $1
+    function getTrafficClass : Integer; cdecl;                                  // ()I A: $1
+    function isBound : boolean; cdecl;                                          // ()Z A: $1
+    function isClosed : boolean; cdecl;                                         // ()Z A: $1
+    function isConnected : boolean; cdecl;                                      // ()Z A: $1
+    function isInputShutdown : boolean; cdecl;                                  // ()Z A: $1
+    function isOutputShutdown : boolean; cdecl;                                 // ()Z A: $1
+    function toString : JString; cdecl;                                         // ()Ljava/lang/String; A: $1
+    procedure bind(localAddr : JSocketAddress) ; cdecl;                         // (Ljava/net/SocketAddress;)V A: $1
+    procedure connect(remoteAddr : JSocketAddress) ; cdecl; overload;           // (Ljava/net/SocketAddress;)V A: $1
+    procedure connect(remoteAddr : JSocketAddress; timeout : Integer) ; cdecl; overload;// (Ljava/net/SocketAddress;I)V A: $1
+    procedure sendUrgentData(value : Integer) ; cdecl;                          // (I)V A: $1
+    procedure setKeepAlive(keepAlive : boolean) ; cdecl;                        // (Z)V A: $1
+    procedure setOOBInline(oobinline : boolean) ; cdecl;                        // (Z)V A: $1
+    procedure setPerformancePreferences(connectionTime : Integer; latency : Integer; bandwidth : Integer) ; cdecl;// (III)V A: $1
+    procedure setReuseAddress(reuse : boolean) ; cdecl;                         // (Z)V A: $1
+    procedure setSoLinger(on : boolean; timeout : Integer) ; cdecl;             // (ZI)V A: $1
+    procedure setTcpNoDelay(on : boolean) ; cdecl;                              // (Z)V A: $1
+    procedure setTrafficClass(value : Integer) ; cdecl;                         // (I)V A: $1
+    procedure shutdownInput ; cdecl;                                            // ()V A: $1
+    procedure shutdownOutput ; cdecl;                                           // ()V A: $1
+  end;
+
+  TJSocket = class(TJavaGenericImport<JSocketClass, JSocket>)
+  end;
+
+  // Merged from: .\java.nio.channels.SocketChannel.pas
+  JSocketChannelClass = interface(JObjectClass)
+    ['{5C03E8E8-13D0-4F39-B390-1F1A2A6C30BE}']
+    function &read(JByteBufferparam0 : JByteBuffer) : Integer; cdecl; overload; // (Ljava/nio/ByteBuffer;)I A: $401
+    function &read(TJavaArrayJByteBufferparam0 : TJavaArray<JByteBuffer>; Integerparam1 : Integer; Integerparam2 : Integer) : Int64; cdecl; overload;// ([Ljava/nio/ByteBuffer;II)J A: $401
+    function &read(targets : TJavaArray<JByteBuffer>) : Int64; cdecl; overload; // ([Ljava/nio/ByteBuffer;)J A: $31
+    function &write(JByteBufferparam0 : JByteBuffer) : Integer; cdecl; overload;// (Ljava/nio/ByteBuffer;)I A: $401
+    function &write(TJavaArrayJByteBufferparam0 : TJavaArray<JByteBuffer>; Integerparam1 : Integer; Integerparam2 : Integer) : Int64; cdecl; overload;// ([Ljava/nio/ByteBuffer;II)J A: $401
+    function &write(sources : TJavaArray<JByteBuffer>) : Int64; cdecl; overload;// ([Ljava/nio/ByteBuffer;)J A: $31
+    function connect(JSocketAddressparam0 : JSocketAddress) : boolean; cdecl;   // (Ljava/net/SocketAddress;)Z A: $401
+    function finishConnect : boolean; cdecl;                                    // ()Z A: $401
+    function isConnected : boolean; cdecl;                                      // ()Z A: $401
+    function isConnectionPending : boolean; cdecl;                              // ()Z A: $401
+    function open : JSocketChannel; cdecl; overload;                            // ()Ljava/nio/channels/SocketChannel; A: $9
+    function open(address : JSocketAddress) : JSocketChannel; cdecl; overload;  // (Ljava/net/SocketAddress;)Ljava/nio/channels/SocketChannel; A: $9
+    function socket : JSocket; cdecl;                                           // ()Ljava/net/Socket; A: $401
+    function validOps : Integer; cdecl;                                         // ()I A: $11
+  end;
+
+  [JavaSignature('java/nio/channels/SocketChannel')]
+  JSocketChannel = interface(JObject)
+    ['{86F679B9-8B56-4AFE-A703-28AD67327128}']
+    function &read(JByteBufferparam0 : JByteBuffer) : Integer; cdecl; overload; // (Ljava/nio/ByteBuffer;)I A: $401
+    function &read(TJavaArrayJByteBufferparam0 : TJavaArray<JByteBuffer>; Integerparam1 : Integer; Integerparam2 : Integer) : Int64; cdecl; overload;// ([Ljava/nio/ByteBuffer;II)J A: $401
+    function &write(JByteBufferparam0 : JByteBuffer) : Integer; cdecl; overload;// (Ljava/nio/ByteBuffer;)I A: $401
+    function &write(TJavaArrayJByteBufferparam0 : TJavaArray<JByteBuffer>; Integerparam1 : Integer; Integerparam2 : Integer) : Int64; cdecl; overload;// ([Ljava/nio/ByteBuffer;II)J A: $401
+    function connect(JSocketAddressparam0 : JSocketAddress) : boolean; cdecl;   // (Ljava/net/SocketAddress;)Z A: $401
+    function finishConnect : boolean; cdecl;                                    // ()Z A: $401
+    function isConnected : boolean; cdecl;                                      // ()Z A: $401
+    function isConnectionPending : boolean; cdecl;                              // ()Z A: $401
+    function socket : JSocket; cdecl;                                           // ()Ljava/net/Socket; A: $401
+  end;
+
+  TJSocketChannel = class(TJavaGenericImport<JSocketChannelClass, JSocketChannel>)
+  end;
+
+
+
+  // Merged from: .\java.nio.channels.Selector.pas
+  JSelectorClass = interface(JObjectClass)
+    ['{4C27CEA6-06C0-482D-B001-457FEF37ED07}']
+    function isOpen : boolean; cdecl;                                           // ()Z A: $401
+    function keys : JSet; cdecl;                                                // ()Ljava/util/Set; A: $401
+    function open : JSelector; cdecl;                                           // ()Ljava/nio/channels/Selector; A: $9
+    function provider : JSelectorProvider; cdecl;                               // ()Ljava/nio/channels/spi/SelectorProvider; A: $401
+    function select : Integer; cdecl; overload;                                 // ()I A: $401
+    function select(Int64param0 : Int64) : Integer; cdecl; overload;            // (J)I A: $401
+    function selectNow : Integer; cdecl;                                        // ()I A: $401
+    function selectedKeys : JSet; cdecl;                                        // ()Ljava/util/Set; A: $401
+    function wakeup : JSelector; cdecl;                                         // ()Ljava/nio/channels/Selector; A: $401
+    procedure close ; cdecl;                                                    // ()V A: $401
+  end;
+
+  [JavaSignature('java/nio/channels/Selector')]
+  JSelector = interface(JObject)
+    ['{2AFB5FC7-E81C-401D-ADC3-0B8274C57216}']
+    function isOpen : boolean; cdecl;                                           // ()Z A: $401
+    function keys : JSet; cdecl;                                                // ()Ljava/util/Set; A: $401
+    function provider : JSelectorProvider; cdecl;                               // ()Ljava/nio/channels/spi/SelectorProvider; A: $401
+    function select : Integer; cdecl; overload;                                 // ()I A: $401
+    function select(Int64param0 : Int64) : Integer; cdecl; overload;            // (J)I A: $401
+    function selectNow : Integer; cdecl;                                        // ()I A: $401
+    function selectedKeys : JSet; cdecl;                                        // ()Ljava/util/Set; A: $401
+    function wakeup : JSelector; cdecl;                                         // ()Ljava/nio/channels/Selector; A: $401
+    procedure close ; cdecl;                                                    // ()V A: $401
+  end;
+
+  TJSelector = class(TJavaGenericImport<JSelectorClass, JSelector>)
+  end;
+
+
+const
+  TJSelectionKeyOP_ACCEPT = 16;
+  TJSelectionKeyOP_CONNECT = 8;
+  TJSelectionKeyOP_READ = 1;
+  TJSelectionKeyOP_WRITE = 4;
+
 
 
 implementation

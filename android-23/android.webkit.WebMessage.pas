@@ -8,10 +8,10 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  android.webkit.WebMessagePort_WebMessageCallback,
   Androidapi.JNI.os;
 
 type
+  JWebMessagePort_WebMessageCallback = interface; // merged
   JWebMessagePort = interface; // merged
   JWebMessage = interface;
 
@@ -52,6 +52,23 @@ type
   end;
 
   TJWebMessagePort = class(TJavaGenericImport<JWebMessagePortClass, JWebMessagePort>)
+  end;
+
+
+  // Merged from: .\android.webkit.WebMessagePort_WebMessageCallback.pas
+  JWebMessagePort_WebMessageCallbackClass = interface(JObjectClass)
+    ['{A34B0FCD-CCA4-477B-B6A4-0E5FDBADBCF6}']
+    function init : JWebMessagePort_WebMessageCallback; cdecl;                  // ()V A: $1
+    procedure onMessage(port : JWebMessagePort; &message : JWebMessage) ; cdecl;// (Landroid/webkit/WebMessagePort;Landroid/webkit/WebMessage;)V A: $1
+  end;
+
+  [JavaSignature('android/webkit/WebMessagePort_WebMessageCallback')]
+  JWebMessagePort_WebMessageCallback = interface(JObject)
+    ['{C221BC49-3283-4C79-B501-FE128B6F5587}']
+    procedure onMessage(port : JWebMessagePort; &message : JWebMessage) ; cdecl;// (Landroid/webkit/WebMessagePort;Landroid/webkit/WebMessage;)V A: $1
+  end;
+
+  TJWebMessagePort_WebMessageCallback = class(TJavaGenericImport<JWebMessagePort_WebMessageCallbackClass, JWebMessagePort_WebMessageCallback>)
   end;
 
 

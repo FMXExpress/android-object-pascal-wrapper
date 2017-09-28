@@ -9,7 +9,7 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   javax.sql.PooledConnection,
-  java.sql.PreparedStatement,
+  java.sql.Array,
   java.sql.SQLException;
 
 type

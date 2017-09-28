@@ -8,7 +8,7 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  android.content.ContentResolver,
+  android.content.ContentProvider,
   Androidapi.JNI.GraphicsContentViewText,
   android.widget.Filter,
   android.widget.FilterQueryProvider;

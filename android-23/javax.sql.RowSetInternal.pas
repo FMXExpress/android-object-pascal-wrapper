@@ -8,7 +8,6 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  java.sql.Connection,
   java.sql.Array,
   javax.sql.RowSetMetaData;
 

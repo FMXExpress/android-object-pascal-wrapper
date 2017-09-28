@@ -12,7 +12,7 @@ uses
   android.content.pm.PathPermission,
   android.net.Uri,
   android.content.ContentValues,
-  android.content.ContentResolver,
+  android.content.ContentProvider,
   android.content.pm.ProviderInfo,
   android.content.ContentProviderResult,
   android.content.res.AssetFileDescriptor,

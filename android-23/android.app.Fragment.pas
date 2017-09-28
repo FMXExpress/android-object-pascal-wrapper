@@ -12,7 +12,6 @@ uses
   Androidapi.JNI.os,
   android.app.Fragment_SavedState,
   android.app.Activity,
-  android.app.FragmentManager,
   android.app.LoaderManager,
   android.content.ClipData,
   Androidapi.JNI.Util,

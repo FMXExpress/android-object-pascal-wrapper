@@ -9,7 +9,6 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   android.database.DatabaseErrorHandler,
-  android.database.sqlite.SQLiteCursorDriver,
   android.database.sqlite.SQLiteQuery,
   android.database.CursorWindow;
 

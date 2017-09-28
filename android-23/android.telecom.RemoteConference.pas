@@ -11,12 +11,12 @@ uses
   Androidapi.JNI.os,
   android.telecom.DisconnectCause,
   android.telecom.CallAudioState,
-  android.telecom.RemoteConnection_Callback,
   android.telecom.StatusHints,
   android.net.Uri,
   android.telecom.RemoteConnection_VideoProvider;
 
 type
+  JRemoteConnection_Callback = interface; // merged
   JRemoteConference_Callback = interface; // merged
   JRemoteConnection = interface; // merged
   JRemoteConference = interface;
@@ -158,6 +158,53 @@ type
   end;
 
   TJRemoteConference_Callback = class(TJavaGenericImport<JRemoteConference_CallbackClass, JRemoteConference_Callback>)
+  end;
+
+
+  // Merged from: .\android.telecom.RemoteConnection_Callback.pas
+  JRemoteConnection_CallbackClass = interface(JObjectClass)
+    ['{B3666C04-692F-43EC-965C-22EBEF821CBE}']
+    function init : JRemoteConnection_Callback; cdecl;                          // ()V A: $1
+    procedure onAddressChanged(connection : JRemoteConnection; address : JUri; presentation : Integer) ; cdecl;// (Landroid/telecom/RemoteConnection;Landroid/net/Uri;I)V A: $1
+    procedure onCallerDisplayNameChanged(connection : JRemoteConnection; callerDisplayName : JString; presentation : Integer) ; cdecl;// (Landroid/telecom/RemoteConnection;Ljava/lang/String;I)V A: $1
+    procedure onConferenceChanged(connection : JRemoteConnection; conference : JRemoteConference) ; cdecl;// (Landroid/telecom/RemoteConnection;Landroid/telecom/RemoteConference;)V A: $1
+    procedure onConferenceableConnectionsChanged(connection : JRemoteConnection; conferenceableConnections : JList) ; cdecl;// (Landroid/telecom/RemoteConnection;Ljava/util/List;)V A: $1
+    procedure onConnectionCapabilitiesChanged(connection : JRemoteConnection; connectionCapabilities : Integer) ; cdecl;// (Landroid/telecom/RemoteConnection;I)V A: $1
+    procedure onDestroyed(connection : JRemoteConnection) ; cdecl;              // (Landroid/telecom/RemoteConnection;)V A: $1
+    procedure onDisconnected(connection : JRemoteConnection; disconnectCause : JDisconnectCause) ; cdecl;// (Landroid/telecom/RemoteConnection;Landroid/telecom/DisconnectCause;)V A: $1
+    procedure onExtrasChanged(connection : JRemoteConnection; extras : JBundle) ; cdecl;// (Landroid/telecom/RemoteConnection;Landroid/os/Bundle;)V A: $1
+    procedure onPostDialChar(connection : JRemoteConnection; nextChar : Char) ; cdecl;// (Landroid/telecom/RemoteConnection;C)V A: $1
+    procedure onPostDialWait(connection : JRemoteConnection; remainingPostDialSequence : JString) ; cdecl;// (Landroid/telecom/RemoteConnection;Ljava/lang/String;)V A: $1
+    procedure onRingbackRequested(connection : JRemoteConnection; ringback : boolean) ; cdecl;// (Landroid/telecom/RemoteConnection;Z)V A: $1
+    procedure onStateChanged(connection : JRemoteConnection; state : Integer) ; cdecl;// (Landroid/telecom/RemoteConnection;I)V A: $1
+    procedure onStatusHintsChanged(connection : JRemoteConnection; statusHints : JStatusHints) ; cdecl;// (Landroid/telecom/RemoteConnection;Landroid/telecom/StatusHints;)V A: $1
+    procedure onVideoProviderChanged(connection : JRemoteConnection; videoProvider : JRemoteConnection_VideoProvider) ; cdecl;// (Landroid/telecom/RemoteConnection;Landroid/telecom/RemoteConnection$VideoProvider;)V A: $1
+    procedure onVideoStateChanged(connection : JRemoteConnection; videoState : Integer) ; cdecl;// (Landroid/telecom/RemoteConnection;I)V A: $1
+    procedure onVoipAudioChanged(connection : JRemoteConnection; isVoip : boolean) ; cdecl;// (Landroid/telecom/RemoteConnection;Z)V A: $1
+  end;
+
+  [JavaSignature('android/telecom/RemoteConnection_Callback')]
+  JRemoteConnection_Callback = interface(JObject)
+    ['{2E987E78-C056-4D9B-A415-64B24C97008C}']
+    procedure onAddressChanged(connection : JRemoteConnection; address : JUri; presentation : Integer) ; cdecl;// (Landroid/telecom/RemoteConnection;Landroid/net/Uri;I)V A: $1
+    procedure onCallerDisplayNameChanged(connection : JRemoteConnection; callerDisplayName : JString; presentation : Integer) ; cdecl;// (Landroid/telecom/RemoteConnection;Ljava/lang/String;I)V A: $1
+    procedure onConferenceChanged(connection : JRemoteConnection; conference : JRemoteConference) ; cdecl;// (Landroid/telecom/RemoteConnection;Landroid/telecom/RemoteConference;)V A: $1
+    procedure onConferenceableConnectionsChanged(connection : JRemoteConnection; conferenceableConnections : JList) ; cdecl;// (Landroid/telecom/RemoteConnection;Ljava/util/List;)V A: $1
+    procedure onConnectionCapabilitiesChanged(connection : JRemoteConnection; connectionCapabilities : Integer) ; cdecl;// (Landroid/telecom/RemoteConnection;I)V A: $1
+    procedure onDestroyed(connection : JRemoteConnection) ; cdecl;              // (Landroid/telecom/RemoteConnection;)V A: $1
+    procedure onDisconnected(connection : JRemoteConnection; disconnectCause : JDisconnectCause) ; cdecl;// (Landroid/telecom/RemoteConnection;Landroid/telecom/DisconnectCause;)V A: $1
+    procedure onExtrasChanged(connection : JRemoteConnection; extras : JBundle) ; cdecl;// (Landroid/telecom/RemoteConnection;Landroid/os/Bundle;)V A: $1
+    procedure onPostDialChar(connection : JRemoteConnection; nextChar : Char) ; cdecl;// (Landroid/telecom/RemoteConnection;C)V A: $1
+    procedure onPostDialWait(connection : JRemoteConnection; remainingPostDialSequence : JString) ; cdecl;// (Landroid/telecom/RemoteConnection;Ljava/lang/String;)V A: $1
+    procedure onRingbackRequested(connection : JRemoteConnection; ringback : boolean) ; cdecl;// (Landroid/telecom/RemoteConnection;Z)V A: $1
+    procedure onStateChanged(connection : JRemoteConnection; state : Integer) ; cdecl;// (Landroid/telecom/RemoteConnection;I)V A: $1
+    procedure onStatusHintsChanged(connection : JRemoteConnection; statusHints : JStatusHints) ; cdecl;// (Landroid/telecom/RemoteConnection;Landroid/telecom/StatusHints;)V A: $1
+    procedure onVideoProviderChanged(connection : JRemoteConnection; videoProvider : JRemoteConnection_VideoProvider) ; cdecl;// (Landroid/telecom/RemoteConnection;Landroid/telecom/RemoteConnection$VideoProvider;)V A: $1
+    procedure onVideoStateChanged(connection : JRemoteConnection; videoState : Integer) ; cdecl;// (Landroid/telecom/RemoteConnection;I)V A: $1
+    procedure onVoipAudioChanged(connection : JRemoteConnection; isVoip : boolean) ; cdecl;// (Landroid/telecom/RemoteConnection;Z)V A: $1
+  end;
+
+  TJRemoteConnection_Callback = class(TJavaGenericImport<JRemoteConnection_CallbackClass, JRemoteConnection_Callback>)
   end;
 
 

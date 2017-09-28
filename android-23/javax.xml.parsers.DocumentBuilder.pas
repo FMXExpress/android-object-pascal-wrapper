@@ -8,7 +8,7 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  org.w3c.dom.Document,
+  org.w3c.dom.Attr,
   org.xml.sax.InputSource,
   org.xml.sax.EntityResolver,
   org.xml.sax.ErrorHandler,

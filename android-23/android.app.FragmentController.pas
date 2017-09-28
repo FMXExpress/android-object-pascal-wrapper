@@ -9,7 +9,6 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   android.app.FragmentHostCallback,
-  android.app.FragmentManager,
   android.app.LoaderManager,
   android.app.Activity,
   Androidapi.JNI.GraphicsContentViewText,

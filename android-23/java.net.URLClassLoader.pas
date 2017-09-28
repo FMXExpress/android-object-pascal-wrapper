@@ -9,7 +9,6 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   java.net.URI,
-  java.net.URLStreamHandlerFactory,
   java.security.Permission,
   java.security.CodeSource,
   java.lang.Package,

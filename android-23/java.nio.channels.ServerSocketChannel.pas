@@ -8,9 +8,7 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  java.nio.channels.spi.AbstractSelector,
-  java.net.ServerSocket,
-  java.net.Socket;
+  java.net.DatagramSocket;
 
 type
   JServerSocketChannel = interface;

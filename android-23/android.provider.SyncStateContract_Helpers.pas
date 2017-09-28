@@ -8,7 +8,7 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  android.content.ContentProviderClient,
+  android.content.ContentProvider,
   android.net.Uri,
   android.accounts.Account,
   android.util.Pair,

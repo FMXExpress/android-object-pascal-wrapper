@@ -8,8 +8,7 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  android.database.sqlite.SQLiteCursorDriver,
-  android.content.ContentResolver,
+  android.content.ContentProvider,
   android.database.DatabaseErrorHandler,
   Androidapi.JNI.os;
 

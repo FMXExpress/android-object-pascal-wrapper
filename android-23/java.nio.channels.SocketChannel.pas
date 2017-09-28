@@ -8,9 +8,8 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  java.nio.channels.spi.AbstractSelector,
+  java.net.DatagramSocket,
   java.net.SocketAddress,
-  java.net.Socket,
   java.nio.ByteBuffer;
 
 type

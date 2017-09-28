@@ -10,8 +10,7 @@ uses
   Androidapi.JNI.JavaTypes,
   android.net.Uri,
   android.content.EntityIterator,
-  android.content.ContentResolver,
-  android.content.ContentProviderClient;
+  android.content.ContentProvider;
 
 type
   JCalendarContract_EventsEntity = interface;

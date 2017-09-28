@@ -8,7 +8,7 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  java.nio.channels.spi.AbstractSelector;
+  java.net.DatagramSocket;
 
 type
   JPipe_SourceChannel = interface;

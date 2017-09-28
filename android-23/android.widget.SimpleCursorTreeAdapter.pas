@@ -9,7 +9,7 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   Androidapi.JNI.GraphicsContentViewText,
-  android.content.ContentResolver,
+  android.content.ContentProvider,
   android.widget.SimpleCursorTreeAdapter_ViewBinder,
   android.widget.ImageView,
   android.text.method.MovementMethod;

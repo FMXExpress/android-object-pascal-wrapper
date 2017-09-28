@@ -9,7 +9,7 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   java.sql.Driver,
-  java.sql.Connection,
+  java.sql.Array,
   java.util.Properties;
 
 type

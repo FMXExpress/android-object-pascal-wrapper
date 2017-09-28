@@ -9,10 +9,9 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   java.net.InetAddress,
-  java.net.Socket,
   java.net.SocketImplFactory,
   java.net.SocketAddress,
-  java.nio.channels.spi.AbstractSelector;
+  java.net.DatagramSocket;
 
 type
   JServerSocketChannel = interface; // merged

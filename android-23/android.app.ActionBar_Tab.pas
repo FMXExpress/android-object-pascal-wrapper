@@ -10,7 +10,7 @@ uses
   Androidapi.JNI.JavaTypes,
   android.graphics.drawable.Drawable,
   Androidapi.JNI.GraphicsContentViewText,
-  android.app.FragmentTransaction;
+  android.app.Activity;
 
 type
   JActionBar_TabListener = interface; // merged

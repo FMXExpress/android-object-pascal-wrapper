@@ -8,8 +8,6 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  android.app.FragmentManager,
-  android.app.FragmentTransaction,
   android.app.Activity,
   Androidapi.JNI.os,
   android.content.DialogInterface;

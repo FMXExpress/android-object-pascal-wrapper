@@ -8,7 +8,7 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  android.content.ContentResolver,
+  android.content.ContentProvider,
   android.database.CursorJoiner_Result;
 
 type

@@ -9,7 +9,7 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   java.lang.reflect.Method,
-  junit.framework.TestCase;
+  junit.framework.Test;
 
 type
   JTestMethod = interface;

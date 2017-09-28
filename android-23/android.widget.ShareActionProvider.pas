@@ -9,7 +9,7 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   Androidapi.JNI.GraphicsContentViewText,
-  android.view.SubMenu,
+  android.view.ActionProvider,
   android.content.ClipData;
 
 type

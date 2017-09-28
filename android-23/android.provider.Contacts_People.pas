@@ -9,7 +9,7 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   android.net.Uri,
-  android.content.ContentResolver,
+  android.content.ContentProvider,
   android.content.ContentValues,
   android.graphics.Bitmap,
   Androidapi.JNI.GraphicsContentViewText,

@@ -12,7 +12,7 @@ uses
   android.content.pm.PackageInstaller_Session,
   android.graphics.Bitmap,
   android.content.pm.PackageInstaller_SessionInfo,
-  android.content.IntentSender,
+  android.content.ClipData,
   android.content.pm.PackageInstaller_SessionCallback,
   Androidapi.JNI.os;
 

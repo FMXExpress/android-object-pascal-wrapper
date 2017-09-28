@@ -8,8 +8,7 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  org.w3c.dom.Attr,
-  org.w3c.dom.Document;
+  org.w3c.dom.Attr;
 
 type
   JLSParserFilter = interface;

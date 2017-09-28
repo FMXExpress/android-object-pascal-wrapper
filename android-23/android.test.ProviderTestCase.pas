@@ -11,7 +11,6 @@ uses
   android.content.ContentProvider,
   android.test.mock.MockContentResolver,
   android.test.IsolatedContext,
-  android.content.ContentResolver,
   Androidapi.JNI.GraphicsContentViewText;
 
 type

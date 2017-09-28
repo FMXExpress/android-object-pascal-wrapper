@@ -8,7 +8,7 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  java.net.Socket,
+  java.net.DatagramSocket,
   java.net.InetAddress;
 
 type

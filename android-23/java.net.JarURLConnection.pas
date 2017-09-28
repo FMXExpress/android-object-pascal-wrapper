@@ -8,7 +8,6 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  java.net.URLConnection,
   java.net.URI,
   java.util.jar.Attributes,
   java.security.cert.Certificate,

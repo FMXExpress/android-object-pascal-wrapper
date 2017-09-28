@@ -9,15 +9,15 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   Androidapi.JNI.GraphicsContentViewText,
-  android.view.SubMenu,
   android.view.ActionProvider_VisibilityListener,
   android.graphics.drawable.Drawable,
   android.content.ClipData,
-  android.view.MenuItem_OnMenuItemClickListener,
-  android.view.ContextMenu_ContextMenuInfo,
-  android.view.MenuItem_OnActionExpandListener;
+  android.view.ContextMenu_ContextMenuInfo;
 
 type
+  JMenuItem_OnActionExpandListener = interface; // merged
+  JMenuItem_OnMenuItemClickListener = interface; // merged
+  JSubMenu = interface; // merged
   JMenuItem = interface; // merged
   JActionProvider = interface;
 
@@ -156,6 +156,72 @@ type
 
   TJMenuItem = class(TJavaGenericImport<JMenuItemClass, JMenuItem>)
   end;
+
+  // Merged from: .\android.view.SubMenu.pas
+  JSubMenuClass = interface(JObjectClass)
+    ['{70C5EE67-1D53-4383-942E-59D5113EE44B}']
+    function getItem : JMenuItem; cdecl;                                        // ()Landroid/view/MenuItem; A: $401
+    function setHeaderIcon(Integerparam0 : Integer) : JSubMenu; cdecl; overload;// (I)Landroid/view/SubMenu; A: $401
+    function setHeaderIcon(JDrawableparam0 : JDrawable) : JSubMenu; cdecl; overload;// (Landroid/graphics/drawable/Drawable;)Landroid/view/SubMenu; A: $401
+    function setHeaderTitle(Integerparam0 : Integer) : JSubMenu; cdecl; overload;// (I)Landroid/view/SubMenu; A: $401
+    function setHeaderTitle(JCharSequenceparam0 : JCharSequence) : JSubMenu; cdecl; overload;// (Ljava/lang/CharSequence;)Landroid/view/SubMenu; A: $401
+    function setHeaderView(JViewparam0 : JView) : JSubMenu; cdecl;              // (Landroid/view/View;)Landroid/view/SubMenu; A: $401
+    function setIcon(Integerparam0 : Integer) : JSubMenu; cdecl; overload;      // (I)Landroid/view/SubMenu; A: $401
+    function setIcon(JDrawableparam0 : JDrawable) : JSubMenu; cdecl; overload;  // (Landroid/graphics/drawable/Drawable;)Landroid/view/SubMenu; A: $401
+    procedure clearHeader ; cdecl;                                              // ()V A: $401
+  end;
+
+  [JavaSignature('android/view/SubMenu')]
+  JSubMenu = interface(JObject)
+    ['{F1842DEF-977D-4A76-88D5-CD9ED651D9AC}']
+    function getItem : JMenuItem; cdecl;                                        // ()Landroid/view/MenuItem; A: $401
+    function setHeaderIcon(Integerparam0 : Integer) : JSubMenu; cdecl; overload;// (I)Landroid/view/SubMenu; A: $401
+    function setHeaderIcon(JDrawableparam0 : JDrawable) : JSubMenu; cdecl; overload;// (Landroid/graphics/drawable/Drawable;)Landroid/view/SubMenu; A: $401
+    function setHeaderTitle(Integerparam0 : Integer) : JSubMenu; cdecl; overload;// (I)Landroid/view/SubMenu; A: $401
+    function setHeaderTitle(JCharSequenceparam0 : JCharSequence) : JSubMenu; cdecl; overload;// (Ljava/lang/CharSequence;)Landroid/view/SubMenu; A: $401
+    function setHeaderView(JViewparam0 : JView) : JSubMenu; cdecl;              // (Landroid/view/View;)Landroid/view/SubMenu; A: $401
+    function setIcon(Integerparam0 : Integer) : JSubMenu; cdecl; overload;      // (I)Landroid/view/SubMenu; A: $401
+    function setIcon(JDrawableparam0 : JDrawable) : JSubMenu; cdecl; overload;  // (Landroid/graphics/drawable/Drawable;)Landroid/view/SubMenu; A: $401
+    procedure clearHeader ; cdecl;                                              // ()V A: $401
+  end;
+
+  TJSubMenu = class(TJavaGenericImport<JSubMenuClass, JSubMenu>)
+  end;
+
+
+  // Merged from: .\android.view.MenuItem_OnMenuItemClickListener.pas
+  JMenuItem_OnMenuItemClickListenerClass = interface(JObjectClass)
+    ['{038C53B7-E28D-4C86-BD98-637DF1AC787D}']
+    function onMenuItemClick(JMenuItemparam0 : JMenuItem) : boolean; cdecl;     // (Landroid/view/MenuItem;)Z A: $401
+  end;
+
+  [JavaSignature('android/view/MenuItem_OnMenuItemClickListener')]
+  JMenuItem_OnMenuItemClickListener = interface(JObject)
+    ['{239451B7-B717-4E4B-B410-D767D7200F57}']
+    function onMenuItemClick(JMenuItemparam0 : JMenuItem) : boolean; cdecl;     // (Landroid/view/MenuItem;)Z A: $401
+  end;
+
+  TJMenuItem_OnMenuItemClickListener = class(TJavaGenericImport<JMenuItem_OnMenuItemClickListenerClass, JMenuItem_OnMenuItemClickListener>)
+  end;
+
+
+  // Merged from: .\android.view.MenuItem_OnActionExpandListener.pas
+  JMenuItem_OnActionExpandListenerClass = interface(JObjectClass)
+    ['{124CB2C7-AF0E-4FA1-9B5C-93D223337009}']
+    function onMenuItemActionCollapse(JMenuItemparam0 : JMenuItem) : boolean; cdecl;// (Landroid/view/MenuItem;)Z A: $401
+    function onMenuItemActionExpand(JMenuItemparam0 : JMenuItem) : boolean; cdecl;// (Landroid/view/MenuItem;)Z A: $401
+  end;
+
+  [JavaSignature('android/view/MenuItem_OnActionExpandListener')]
+  JMenuItem_OnActionExpandListener = interface(JObject)
+    ['{F57B7FAA-1C42-4693-A88E-516828DDE8F8}']
+    function onMenuItemActionCollapse(JMenuItemparam0 : JMenuItem) : boolean; cdecl;// (Landroid/view/MenuItem;)Z A: $401
+    function onMenuItemActionExpand(JMenuItemparam0 : JMenuItem) : boolean; cdecl;// (Landroid/view/MenuItem;)Z A: $401
+  end;
+
+  TJMenuItem_OnActionExpandListener = class(TJavaGenericImport<JMenuItem_OnActionExpandListenerClass, JMenuItem_OnActionExpandListener>)
+  end;
+
 
 const
   TJMenuItemSHOW_AS_ACTION_ALWAYS = 2;

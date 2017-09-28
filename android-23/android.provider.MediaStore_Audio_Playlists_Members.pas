@@ -9,7 +9,7 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   android.net.Uri,
-  android.content.ContentResolver;
+  android.content.ContentProvider;
 
 type
   JMediaStore_Audio_Playlists_Members = interface;

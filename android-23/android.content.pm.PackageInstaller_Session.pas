@@ -8,7 +8,7 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  android.content.IntentSender;
+  android.content.ClipData;
 
 type
   JPackageInstaller_Session = interface;

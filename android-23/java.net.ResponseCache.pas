@@ -10,8 +10,7 @@ uses
   Androidapi.JNI.JavaTypes,
   java.net.CacheResponse,
   java.net.URI,
-  java.net.CacheRequest,
-  java.net.URLConnection;
+  java.net.CacheRequest;
 
 type
   JResponseCache = interface;

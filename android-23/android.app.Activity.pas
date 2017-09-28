@@ -19,8 +19,7 @@ uses
   android.graphics.Bitmap,
   android.app.assist.AssistContent,
   android.content.res.Configuration,
-  android.app.FragmentManager,
-  android.content.ContentResolver,
+  android.content.ContentProvider,
   android.net.Uri,
   android.app.ActionBar,
   android.widget.Toolbar,
@@ -37,7 +36,6 @@ uses
   android.graphics.drawable.Drawable,
   android.view.LayoutInflater,
   android.view.MenuInflater,
-  android.content.IntentSender,
   android.content.ComponentName,
   android.app.PendingIntent,
   android.content.SharedPreferences,
@@ -53,9 +51,13 @@ uses
   android.content.DialogInterface_OnCancelListener,
   android.content.DialogInterface_OnDismissListener,
   android.content.DialogInterface_OnShowListener,
-  android.content.DialogInterface_OnKeyListener;
+  android.content.DialogInterface_OnKeyListener,
+  android.app.FragmentManager_BackStackEntry,
+  android.app.FragmentManager_OnBackStackChangedListener;
 
 type
+  JFragmentTransaction = interface; // merged
+  JFragmentManager = interface; // merged
   JDialog = interface; // merged
   JTaskStackBuilder = interface; // merged
   JFragment = interface; // merged
@@ -861,8 +863,155 @@ type
   TJDialog = class(TJavaGenericImport<JDialogClass, JDialog>)
   end;
 
+  // Merged from: .\android.app.FragmentManager.pas
+  JFragmentManagerClass = interface(JObjectClass)
+    ['{18E04880-BE9E-4329-8149-9B4AABF98170}']
+    function _GetPOP_BACK_STACK_INCLUSIVE : Integer; cdecl;                     //  A: $19
+    function beginTransaction : JFragmentTransaction; cdecl;                    // ()Landroid/app/FragmentTransaction; A: $401
+    function executePendingTransactions : boolean; cdecl;                       // ()Z A: $401
+    function findFragmentById(Integerparam0 : Integer) : JFragment; cdecl;      // (I)Landroid/app/Fragment; A: $401
+    function findFragmentByTag(JStringparam0 : JString) : JFragment; cdecl;     // (Ljava/lang/String;)Landroid/app/Fragment; A: $401
+    function getBackStackEntryAt(Integerparam0 : Integer) : JFragmentManager_BackStackEntry; cdecl;// (I)Landroid/app/FragmentManager$BackStackEntry; A: $401
+    function getBackStackEntryCount : Integer; cdecl;                           // ()I A: $401
+    function getFragment(JBundleparam0 : JBundle; JStringparam1 : JString) : JFragment; cdecl;// (Landroid/os/Bundle;Ljava/lang/String;)Landroid/app/Fragment; A: $401
+    function init : JFragmentManager; cdecl;                                    // ()V A: $1
+    function isDestroyed : boolean; cdecl;                                      // ()Z A: $401
+    function popBackStackImmediate : boolean; cdecl; overload;                  // ()Z A: $401
+    function popBackStackImmediate(Integerparam0 : Integer; Integerparam1 : Integer) : boolean; cdecl; overload;// (II)Z A: $401
+    function popBackStackImmediate(JStringparam0 : JString; Integerparam1 : Integer) : boolean; cdecl; overload;// (Ljava/lang/String;I)Z A: $401
+    function saveFragmentInstanceState(JFragmentparam0 : JFragment) : JFragment_SavedState; cdecl;// (Landroid/app/Fragment;)Landroid/app/Fragment$SavedState; A: $401
+    procedure addOnBackStackChangedListener(JFragmentManager_OnBackStackChangedListenerparam0 : JFragmentManager_OnBackStackChangedListener) ; cdecl;// (Landroid/app/FragmentManager$OnBackStackChangedListener;)V A: $401
+    procedure dump(JStringparam0 : JString; JFileDescriptorparam1 : JFileDescriptor; JPrintWriterparam2 : JPrintWriter; TJavaArrayJStringparam3 : TJavaArray<JString>) ; cdecl;// (Ljava/lang/String;Ljava/io/FileDescriptor;Ljava/io/PrintWriter;[Ljava/lang/String;)V A: $401
+    procedure enableDebugLogging(enabled : boolean) ; cdecl;                    // (Z)V A: $9
+    procedure invalidateOptionsMenu ; cdecl;                                    // ()V A: $1
+    procedure popBackStack ; cdecl; overload;                                   // ()V A: $401
+    procedure popBackStack(Integerparam0 : Integer; Integerparam1 : Integer) ; cdecl; overload;// (II)V A: $401
+    procedure popBackStack(JStringparam0 : JString; Integerparam1 : Integer) ; cdecl; overload;// (Ljava/lang/String;I)V A: $401
+    procedure putFragment(JBundleparam0 : JBundle; JStringparam1 : JString; JFragmentparam2 : JFragment) ; cdecl;// (Landroid/os/Bundle;Ljava/lang/String;Landroid/app/Fragment;)V A: $401
+    procedure removeOnBackStackChangedListener(JFragmentManager_OnBackStackChangedListenerparam0 : JFragmentManager_OnBackStackChangedListener) ; cdecl;// (Landroid/app/FragmentManager$OnBackStackChangedListener;)V A: $401
+    property POP_BACK_STACK_INCLUSIVE : Integer read _GetPOP_BACK_STACK_INCLUSIVE;// I A: $19
+  end;
+
+  [JavaSignature('android/app/FragmentManager$OnBackStackChangedListener')]
+  JFragmentManager = interface(JObject)
+    ['{D1F05813-10CE-4905-AEBF-C1AC57684CE3}']
+    function beginTransaction : JFragmentTransaction; cdecl;                    // ()Landroid/app/FragmentTransaction; A: $401
+    function executePendingTransactions : boolean; cdecl;                       // ()Z A: $401
+    function findFragmentById(Integerparam0 : Integer) : JFragment; cdecl;      // (I)Landroid/app/Fragment; A: $401
+    function findFragmentByTag(JStringparam0 : JString) : JFragment; cdecl;     // (Ljava/lang/String;)Landroid/app/Fragment; A: $401
+    function getBackStackEntryAt(Integerparam0 : Integer) : JFragmentManager_BackStackEntry; cdecl;// (I)Landroid/app/FragmentManager$BackStackEntry; A: $401
+    function getBackStackEntryCount : Integer; cdecl;                           // ()I A: $401
+    function getFragment(JBundleparam0 : JBundle; JStringparam1 : JString) : JFragment; cdecl;// (Landroid/os/Bundle;Ljava/lang/String;)Landroid/app/Fragment; A: $401
+    function isDestroyed : boolean; cdecl;                                      // ()Z A: $401
+    function popBackStackImmediate : boolean; cdecl; overload;                  // ()Z A: $401
+    function popBackStackImmediate(Integerparam0 : Integer; Integerparam1 : Integer) : boolean; cdecl; overload;// (II)Z A: $401
+    function popBackStackImmediate(JStringparam0 : JString; Integerparam1 : Integer) : boolean; cdecl; overload;// (Ljava/lang/String;I)Z A: $401
+    function saveFragmentInstanceState(JFragmentparam0 : JFragment) : JFragment_SavedState; cdecl;// (Landroid/app/Fragment;)Landroid/app/Fragment$SavedState; A: $401
+    procedure addOnBackStackChangedListener(JFragmentManager_OnBackStackChangedListenerparam0 : JFragmentManager_OnBackStackChangedListener) ; cdecl;// (Landroid/app/FragmentManager$OnBackStackChangedListener;)V A: $401
+    procedure dump(JStringparam0 : JString; JFileDescriptorparam1 : JFileDescriptor; JPrintWriterparam2 : JPrintWriter; TJavaArrayJStringparam3 : TJavaArray<JString>) ; cdecl;// (Ljava/lang/String;Ljava/io/FileDescriptor;Ljava/io/PrintWriter;[Ljava/lang/String;)V A: $401
+    procedure invalidateOptionsMenu ; cdecl;                                    // ()V A: $1
+    procedure popBackStack ; cdecl; overload;                                   // ()V A: $401
+    procedure popBackStack(Integerparam0 : Integer; Integerparam1 : Integer) ; cdecl; overload;// (II)V A: $401
+    procedure popBackStack(JStringparam0 : JString; Integerparam1 : Integer) ; cdecl; overload;// (Ljava/lang/String;I)V A: $401
+    procedure putFragment(JBundleparam0 : JBundle; JStringparam1 : JString; JFragmentparam2 : JFragment) ; cdecl;// (Landroid/os/Bundle;Ljava/lang/String;Landroid/app/Fragment;)V A: $401
+    procedure removeOnBackStackChangedListener(JFragmentManager_OnBackStackChangedListenerparam0 : JFragmentManager_OnBackStackChangedListener) ; cdecl;// (Landroid/app/FragmentManager$OnBackStackChangedListener;)V A: $401
+  end;
+
+  TJFragmentManager = class(TJavaGenericImport<JFragmentManagerClass, JFragmentManager>)
+  end;
+
+
+  // Merged from: .\android.app.FragmentTransaction.pas
+  JFragmentTransactionClass = interface(JObjectClass)
+    ['{2E67BA28-DB1D-42D2-B9A5-6FF0FE91C19A}']
+    function _GetTRANSIT_ENTER_MASK : Integer; cdecl;                           //  A: $19
+    function _GetTRANSIT_EXIT_MASK : Integer; cdecl;                            //  A: $19
+    function _GetTRANSIT_FRAGMENT_CLOSE : Integer; cdecl;                       //  A: $19
+    function _GetTRANSIT_FRAGMENT_FADE : Integer; cdecl;                        //  A: $19
+    function _GetTRANSIT_FRAGMENT_OPEN : Integer; cdecl;                        //  A: $19
+    function _GetTRANSIT_NONE : Integer; cdecl;                                 //  A: $19
+    function _GetTRANSIT_UNSET : Integer; cdecl;                                //  A: $19
+    function add(Integerparam0 : Integer; JFragmentparam1 : JFragment) : JFragmentTransaction; cdecl; overload;// (ILandroid/app/Fragment;)Landroid/app/FragmentTransaction; A: $401
+    function add(Integerparam0 : Integer; JFragmentparam1 : JFragment; JStringparam2 : JString) : JFragmentTransaction; cdecl; overload;// (ILandroid/app/Fragment;Ljava/lang/String;)Landroid/app/FragmentTransaction; A: $401
+    function add(JFragmentparam0 : JFragment; JStringparam1 : JString) : JFragmentTransaction; cdecl; overload;// (Landroid/app/Fragment;Ljava/lang/String;)Landroid/app/FragmentTransaction; A: $401
+    function addSharedElement(JViewparam0 : JView; JStringparam1 : JString) : JFragmentTransaction; cdecl;// (Landroid/view/View;Ljava/lang/String;)Landroid/app/FragmentTransaction; A: $401
+    function addToBackStack(JStringparam0 : JString) : JFragmentTransaction; cdecl;// (Ljava/lang/String;)Landroid/app/FragmentTransaction; A: $401
+    function attach(JFragmentparam0 : JFragment) : JFragmentTransaction; cdecl; // (Landroid/app/Fragment;)Landroid/app/FragmentTransaction; A: $401
+    function commit : Integer; cdecl;                                           // ()I A: $401
+    function commitAllowingStateLoss : Integer; cdecl;                          // ()I A: $401
+    function detach(JFragmentparam0 : JFragment) : JFragmentTransaction; cdecl; // (Landroid/app/Fragment;)Landroid/app/FragmentTransaction; A: $401
+    function disallowAddToBackStack : JFragmentTransaction; cdecl;              // ()Landroid/app/FragmentTransaction; A: $401
+    function hide(JFragmentparam0 : JFragment) : JFragmentTransaction; cdecl;   // (Landroid/app/Fragment;)Landroid/app/FragmentTransaction; A: $401
+    function init : JFragmentTransaction; cdecl;                                // ()V A: $1
+    function isAddToBackStackAllowed : boolean; cdecl;                          // ()Z A: $401
+    function isEmpty : boolean; cdecl;                                          // ()Z A: $401
+    function remove(JFragmentparam0 : JFragment) : JFragmentTransaction; cdecl; // (Landroid/app/Fragment;)Landroid/app/FragmentTransaction; A: $401
+    function replace(Integerparam0 : Integer; JFragmentparam1 : JFragment) : JFragmentTransaction; cdecl; overload;// (ILandroid/app/Fragment;)Landroid/app/FragmentTransaction; A: $401
+    function replace(Integerparam0 : Integer; JFragmentparam1 : JFragment; JStringparam2 : JString) : JFragmentTransaction; cdecl; overload;// (ILandroid/app/Fragment;Ljava/lang/String;)Landroid/app/FragmentTransaction; A: $401
+    function setBreadCrumbShortTitle(Integerparam0 : Integer) : JFragmentTransaction; cdecl; overload;// (I)Landroid/app/FragmentTransaction; A: $401
+    function setBreadCrumbShortTitle(JCharSequenceparam0 : JCharSequence) : JFragmentTransaction; cdecl; overload;// (Ljava/lang/CharSequence;)Landroid/app/FragmentTransaction; A: $401
+    function setBreadCrumbTitle(Integerparam0 : Integer) : JFragmentTransaction; cdecl; overload;// (I)Landroid/app/FragmentTransaction; A: $401
+    function setBreadCrumbTitle(JCharSequenceparam0 : JCharSequence) : JFragmentTransaction; cdecl; overload;// (Ljava/lang/CharSequence;)Landroid/app/FragmentTransaction; A: $401
+    function setCustomAnimations(Integerparam0 : Integer; Integerparam1 : Integer) : JFragmentTransaction; cdecl; overload;// (II)Landroid/app/FragmentTransaction; A: $401
+    function setCustomAnimations(Integerparam0 : Integer; Integerparam1 : Integer; Integerparam2 : Integer; Integerparam3 : Integer) : JFragmentTransaction; cdecl; overload;// (IIII)Landroid/app/FragmentTransaction; A: $401
+    function setTransition(Integerparam0 : Integer) : JFragmentTransaction; cdecl;// (I)Landroid/app/FragmentTransaction; A: $401
+    function setTransitionStyle(Integerparam0 : Integer) : JFragmentTransaction; cdecl;// (I)Landroid/app/FragmentTransaction; A: $401
+    function show(JFragmentparam0 : JFragment) : JFragmentTransaction; cdecl;   // (Landroid/app/Fragment;)Landroid/app/FragmentTransaction; A: $401
+    property TRANSIT_ENTER_MASK : Integer read _GetTRANSIT_ENTER_MASK;          // I A: $19
+    property TRANSIT_EXIT_MASK : Integer read _GetTRANSIT_EXIT_MASK;            // I A: $19
+    property TRANSIT_FRAGMENT_CLOSE : Integer read _GetTRANSIT_FRAGMENT_CLOSE;  // I A: $19
+    property TRANSIT_FRAGMENT_FADE : Integer read _GetTRANSIT_FRAGMENT_FADE;    // I A: $19
+    property TRANSIT_FRAGMENT_OPEN : Integer read _GetTRANSIT_FRAGMENT_OPEN;    // I A: $19
+    property TRANSIT_NONE : Integer read _GetTRANSIT_NONE;                      // I A: $19
+    property TRANSIT_UNSET : Integer read _GetTRANSIT_UNSET;                    // I A: $19
+  end;
+
+  [JavaSignature('android/app/FragmentTransaction')]
+  JFragmentTransaction = interface(JObject)
+    ['{24D3267D-A55A-49FF-8961-42AA1FBC04D0}']
+    function add(Integerparam0 : Integer; JFragmentparam1 : JFragment) : JFragmentTransaction; cdecl; overload;// (ILandroid/app/Fragment;)Landroid/app/FragmentTransaction; A: $401
+    function add(Integerparam0 : Integer; JFragmentparam1 : JFragment; JStringparam2 : JString) : JFragmentTransaction; cdecl; overload;// (ILandroid/app/Fragment;Ljava/lang/String;)Landroid/app/FragmentTransaction; A: $401
+    function add(JFragmentparam0 : JFragment; JStringparam1 : JString) : JFragmentTransaction; cdecl; overload;// (Landroid/app/Fragment;Ljava/lang/String;)Landroid/app/FragmentTransaction; A: $401
+    function addSharedElement(JViewparam0 : JView; JStringparam1 : JString) : JFragmentTransaction; cdecl;// (Landroid/view/View;Ljava/lang/String;)Landroid/app/FragmentTransaction; A: $401
+    function addToBackStack(JStringparam0 : JString) : JFragmentTransaction; cdecl;// (Ljava/lang/String;)Landroid/app/FragmentTransaction; A: $401
+    function attach(JFragmentparam0 : JFragment) : JFragmentTransaction; cdecl; // (Landroid/app/Fragment;)Landroid/app/FragmentTransaction; A: $401
+    function commit : Integer; cdecl;                                           // ()I A: $401
+    function commitAllowingStateLoss : Integer; cdecl;                          // ()I A: $401
+    function detach(JFragmentparam0 : JFragment) : JFragmentTransaction; cdecl; // (Landroid/app/Fragment;)Landroid/app/FragmentTransaction; A: $401
+    function disallowAddToBackStack : JFragmentTransaction; cdecl;              // ()Landroid/app/FragmentTransaction; A: $401
+    function hide(JFragmentparam0 : JFragment) : JFragmentTransaction; cdecl;   // (Landroid/app/Fragment;)Landroid/app/FragmentTransaction; A: $401
+    function isAddToBackStackAllowed : boolean; cdecl;                          // ()Z A: $401
+    function isEmpty : boolean; cdecl;                                          // ()Z A: $401
+    function remove(JFragmentparam0 : JFragment) : JFragmentTransaction; cdecl; // (Landroid/app/Fragment;)Landroid/app/FragmentTransaction; A: $401
+    function replace(Integerparam0 : Integer; JFragmentparam1 : JFragment) : JFragmentTransaction; cdecl; overload;// (ILandroid/app/Fragment;)Landroid/app/FragmentTransaction; A: $401
+    function replace(Integerparam0 : Integer; JFragmentparam1 : JFragment; JStringparam2 : JString) : JFragmentTransaction; cdecl; overload;// (ILandroid/app/Fragment;Ljava/lang/String;)Landroid/app/FragmentTransaction; A: $401
+    function setBreadCrumbShortTitle(Integerparam0 : Integer) : JFragmentTransaction; cdecl; overload;// (I)Landroid/app/FragmentTransaction; A: $401
+    function setBreadCrumbShortTitle(JCharSequenceparam0 : JCharSequence) : JFragmentTransaction; cdecl; overload;// (Ljava/lang/CharSequence;)Landroid/app/FragmentTransaction; A: $401
+    function setBreadCrumbTitle(Integerparam0 : Integer) : JFragmentTransaction; cdecl; overload;// (I)Landroid/app/FragmentTransaction; A: $401
+    function setBreadCrumbTitle(JCharSequenceparam0 : JCharSequence) : JFragmentTransaction; cdecl; overload;// (Ljava/lang/CharSequence;)Landroid/app/FragmentTransaction; A: $401
+    function setCustomAnimations(Integerparam0 : Integer; Integerparam1 : Integer) : JFragmentTransaction; cdecl; overload;// (II)Landroid/app/FragmentTransaction; A: $401
+    function setCustomAnimations(Integerparam0 : Integer; Integerparam1 : Integer; Integerparam2 : Integer; Integerparam3 : Integer) : JFragmentTransaction; cdecl; overload;// (IIII)Landroid/app/FragmentTransaction; A: $401
+    function setTransition(Integerparam0 : Integer) : JFragmentTransaction; cdecl;// (I)Landroid/app/FragmentTransaction; A: $401
+    function setTransitionStyle(Integerparam0 : Integer) : JFragmentTransaction; cdecl;// (I)Landroid/app/FragmentTransaction; A: $401
+    function show(JFragmentparam0 : JFragment) : JFragmentTransaction; cdecl;   // (Landroid/app/Fragment;)Landroid/app/FragmentTransaction; A: $401
+  end;
+
+  TJFragmentTransaction = class(TJavaGenericImport<JFragmentTransactionClass, JFragmentTransaction>)
+  end;
+
+
 
 const
+  TJFragmentTransactionTRANSIT_ENTER_MASK = 4096;
+  TJFragmentTransactionTRANSIT_EXIT_MASK = 8192;
+  TJFragmentTransactionTRANSIT_FRAGMENT_CLOSE = 8194;
+  TJFragmentTransactionTRANSIT_FRAGMENT_FADE = 4099;
+  TJFragmentTransactionTRANSIT_FRAGMENT_OPEN = 4097;
+  TJFragmentTransactionTRANSIT_NONE = 0;
+  TJFragmentTransactionTRANSIT_UNSET = -1;
+
+  TJFragmentManagerPOP_BACK_STACK_INCLUSIVE = 1;
+
   TJActivityDEFAULT_KEYS_DIALER = 1;
   TJActivityDEFAULT_KEYS_DISABLE = 0;
   TJActivityDEFAULT_KEYS_SEARCH_GLOBAL = 4;

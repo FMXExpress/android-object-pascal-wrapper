@@ -23,10 +23,10 @@ uses
   android.graphics.DrawFilter,
   android.graphics.Canvas_EdgeType,
   android.graphics.PorterDuff_Mode,
-  android.graphics.Canvas_VertexMode,
-  android.graphics.Picture;
+  android.graphics.Canvas_VertexMode;
 
 type
+  JPicture = interface; // merged
   JCanvas = interface; // merged
   JBitmap = interface;
 
@@ -340,6 +340,35 @@ type
   end;
 
   end;
+
+  // Merged from: .\android.graphics.Picture.pas
+  JPictureClass = interface(JObjectClass)
+    ['{B4AB37D0-D31A-48F7-B4C6-34667491BD0D}']
+    function beginRecording(width : Integer; height : Integer) : JCanvas; cdecl;// (II)Landroid/graphics/Canvas; A: $1
+    function createFromStream(stream : JInputStream) : JPicture; deprecated; cdecl;// (Ljava/io/InputStream;)Landroid/graphics/Picture; A: $9
+    function getHeight : Integer; cdecl;                                        // ()I A: $1
+    function getWidth : Integer; cdecl;                                         // ()I A: $1
+    function init : JPicture; cdecl; overload;                                  // ()V A: $1
+    function init(src : JPicture) : JPicture; cdecl; overload;                  // (Landroid/graphics/Picture;)V A: $1
+    procedure draw(canvas : JCanvas) ; cdecl;                                   // (Landroid/graphics/Canvas;)V A: $1
+    procedure endRecording ; cdecl;                                             // ()V A: $1
+    procedure writeToStream(stream : JOutputStream) ; deprecated; cdecl;        // (Ljava/io/OutputStream;)V A: $1
+  end;
+
+  [JavaSignature('android/graphics/Picture')]
+  JPicture = interface(JObject)
+    ['{37E26345-4B97-40D9-B84C-37A62EC58DC3}']
+    function beginRecording(width : Integer; height : Integer) : JCanvas; cdecl;// (II)Landroid/graphics/Canvas; A: $1
+    function getHeight : Integer; cdecl;                                        // ()I A: $1
+    function getWidth : Integer; cdecl;                                         // ()I A: $1
+    procedure draw(canvas : JCanvas) ; cdecl;                                   // (Landroid/graphics/Canvas;)V A: $1
+    procedure endRecording ; cdecl;                                             // ()V A: $1
+    procedure writeToStream(stream : JOutputStream) ; deprecated; cdecl;        // (Ljava/io/OutputStream;)V A: $1
+  end;
+
+  TJPicture = class(TJavaGenericImport<JPictureClass, JPicture>)
+  end;
+
 
 const
   TJCanvasALL_SAVE_FLAG = 31;

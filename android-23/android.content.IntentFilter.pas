@@ -11,7 +11,7 @@ uses
   Androidapi.JNI.os,
   android.content.IntentFilter_AuthorityEntry,
   android.net.Uri,
-  android.content.ContentResolver,
+  android.content.ContentProvider,
   android.content.ClipData,
   org.xmlpull.v1.XmlSerializer,
   org.xmlpull.v1.XmlPullParser,

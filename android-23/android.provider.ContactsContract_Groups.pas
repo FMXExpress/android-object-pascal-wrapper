@@ -10,7 +10,7 @@ uses
   Androidapi.JNI.JavaTypes,
   android.net.Uri,
   android.content.EntityIterator,
-  android.content.ContentResolver;
+  android.content.ContentProvider;
 
 type
   JContactsContract_Groups = interface;

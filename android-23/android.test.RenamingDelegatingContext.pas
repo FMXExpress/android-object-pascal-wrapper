@@ -10,7 +10,6 @@ uses
   Androidapi.JNI.JavaTypes,
   Androidapi.JNI.GraphicsContentViewText,
   android.content.ContentProvider,
-  android.database.sqlite.SQLiteCursorDriver,
   android.database.DatabaseErrorHandler;
 
 type

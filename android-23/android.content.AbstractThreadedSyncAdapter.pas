@@ -11,7 +11,7 @@ uses
   Androidapi.JNI.GraphicsContentViewText,
   Androidapi.JNI.os,
   android.accounts.Account,
-  android.content.ContentProviderClient,
+  android.content.ContentProvider,
   android.content.SyncResult;
 
 type

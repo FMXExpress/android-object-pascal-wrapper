@@ -11,7 +11,7 @@ uses
   android.net.Uri,
   Androidapi.JNI.GraphicsContentViewText,
   android.graphics.Bitmap,
-  android.content.ContentResolver,
+  android.content.ContentProvider,
   android.graphics.Point,
   Androidapi.JNI.os;
 

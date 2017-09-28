@@ -24,13 +24,10 @@ uses
   android.net.http.SslCertificate,
   android.webkit.WebBackForwardList,
   android.webkit.WebView_VisualStateCallback,
-  android.graphics.Picture,
   android.print.PrintDocumentAdapter,
   android.webkit.WebView_HitTestResult,
   android.webkit.WebView_FindListener,
-  android.webkit.WebViewClient,
   android.webkit.DownloadListener,
-  android.webkit.WebView_PictureListener,
   android.webkit.WebMessage,
   android.net.Uri,
   android.webkit.WebSettings,
@@ -40,9 +37,19 @@ uses
   android.view.inputmethod.InputConnection,
   android.view.inputmethod.EditorInfo,
   android.graphics.Rect,
-  android.graphics.Paint;
+  android.graphics.Paint,
+  android.webkit.WebResourceResponse,
+  android.webkit.WebResourceRequest,
+  android.webkit.WebResourceError,
+  android.webkit.SslErrorHandler,
+  android.net.http.SslError,
+  android.webkit.ClientCertRequest,
+  android.webkit.HttpAuthHandler,
+  android.view.InputEvent;
 
 type
+  JWebView_PictureListener = interface; // merged
+  JWebViewClient = interface; // merged
   JWebView = interface; // merged
   JWebChromeClient = interface;
 
@@ -359,9 +366,128 @@ type
   end;
 
   TJWebView = class(TJavaGenericImport<JWebViewClass, JWebView>)
+
+  // Merged from: .\android.webkit.WebViewClient.pas
+  JWebViewClientClass = interface(JObjectClass)
+    ['{AED2ED5F-21B2-47D8-9894-2EFD04E57878}']
+    function _GetERROR_AUTHENTICATION : Integer; cdecl;                         //  A: $19
+    function _GetERROR_BAD_URL : Integer; cdecl;                                //  A: $19
+    function _GetERROR_CONNECT : Integer; cdecl;                                //  A: $19
+    function _GetERROR_FAILED_SSL_HANDSHAKE : Integer; cdecl;                   //  A: $19
+    function _GetERROR_FILE : Integer; cdecl;                                   //  A: $19
+    function _GetERROR_FILE_NOT_FOUND : Integer; cdecl;                         //  A: $19
+    function _GetERROR_HOST_LOOKUP : Integer; cdecl;                            //  A: $19
+    function _GetERROR_IO : Integer; cdecl;                                     //  A: $19
+    function _GetERROR_PROXY_AUTHENTICATION : Integer; cdecl;                   //  A: $19
+    function _GetERROR_REDIRECT_LOOP : Integer; cdecl;                          //  A: $19
+    function _GetERROR_TIMEOUT : Integer; cdecl;                                //  A: $19
+    function _GetERROR_TOO_MANY_REQUESTS : Integer; cdecl;                      //  A: $19
+    function _GetERROR_UNKNOWN : Integer; cdecl;                                //  A: $19
+    function _GetERROR_UNSUPPORTED_AUTH_SCHEME : Integer; cdecl;                //  A: $19
+    function _GetERROR_UNSUPPORTED_SCHEME : Integer; cdecl;                     //  A: $19
+    function init : JWebViewClient; cdecl;                                      // ()V A: $1
+    function shouldInterceptRequest(view : JWebView; request : JWebResourceRequest) : JWebResourceResponse; cdecl; overload;// (Landroid/webkit/WebView;Landroid/webkit/WebResourceRequest;)Landroid/webkit/WebResourceResponse; A: $1
+    function shouldInterceptRequest(view : JWebView; url : JString) : JWebResourceResponse; deprecated; cdecl; overload;// (Landroid/webkit/WebView;Ljava/lang/String;)Landroid/webkit/WebResourceResponse; A: $1
+    function shouldOverrideKeyEvent(view : JWebView; event : JKeyEvent) : boolean; cdecl;// (Landroid/webkit/WebView;Landroid/view/KeyEvent;)Z A: $1
+    function shouldOverrideUrlLoading(view : JWebView; url : JString) : boolean; cdecl;// (Landroid/webkit/WebView;Ljava/lang/String;)Z A: $1
+    procedure doUpdateVisitedHistory(view : JWebView; url : JString; isReload : boolean) ; cdecl;// (Landroid/webkit/WebView;Ljava/lang/String;Z)V A: $1
+    procedure onFormResubmission(view : JWebView; dontResend : JMessage; resend : JMessage) ; cdecl;// (Landroid/webkit/WebView;Landroid/os/Message;Landroid/os/Message;)V A: $1
+    procedure onLoadResource(view : JWebView; url : JString) ; cdecl;           // (Landroid/webkit/WebView;Ljava/lang/String;)V A: $1
+    procedure onPageCommitVisible(view : JWebView; url : JString) ; cdecl;      // (Landroid/webkit/WebView;Ljava/lang/String;)V A: $1
+    procedure onPageFinished(view : JWebView; url : JString) ; cdecl;           // (Landroid/webkit/WebView;Ljava/lang/String;)V A: $1
+    procedure onPageStarted(view : JWebView; url : JString; favicon : JBitmap) ; cdecl;// (Landroid/webkit/WebView;Ljava/lang/String;Landroid/graphics/Bitmap;)V A: $1
+    procedure onReceivedClientCertRequest(view : JWebView; request : JClientCertRequest) ; cdecl;// (Landroid/webkit/WebView;Landroid/webkit/ClientCertRequest;)V A: $1
+    procedure onReceivedError(view : JWebView; errorCode : Integer; description : JString; failingUrl : JString) ; deprecated; cdecl; overload;// (Landroid/webkit/WebView;ILjava/lang/String;Ljava/lang/String;)V A: $1
+    procedure onReceivedError(view : JWebView; request : JWebResourceRequest; error : JWebResourceError) ; cdecl; overload;// (Landroid/webkit/WebView;Landroid/webkit/WebResourceRequest;Landroid/webkit/WebResourceError;)V A: $1
+    procedure onReceivedHttpAuthRequest(view : JWebView; handler : JHttpAuthHandler; host : JString; realm : JString) ; cdecl;// (Landroid/webkit/WebView;Landroid/webkit/HttpAuthHandler;Ljava/lang/String;Ljava/lang/String;)V A: $1
+    procedure onReceivedHttpError(view : JWebView; request : JWebResourceRequest; errorResponse : JWebResourceResponse) ; cdecl;// (Landroid/webkit/WebView;Landroid/webkit/WebResourceRequest;Landroid/webkit/WebResourceResponse;)V A: $1
+    procedure onReceivedLoginRequest(view : JWebView; realm : JString; account : JString; args : JString) ; cdecl;// (Landroid/webkit/WebView;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V A: $1
+    procedure onReceivedSslError(view : JWebView; handler : JSslErrorHandler; error : JSslError) ; cdecl;// (Landroid/webkit/WebView;Landroid/webkit/SslErrorHandler;Landroid/net/http/SslError;)V A: $1
+    procedure onScaleChanged(view : JWebView; oldScale : Single; newScale : Single) ; cdecl;// (Landroid/webkit/WebView;FF)V A: $1
+    procedure onTooManyRedirects(view : JWebView; cancelMsg : JMessage; continueMsg : JMessage) ; deprecated; cdecl;// (Landroid/webkit/WebView;Landroid/os/Message;Landroid/os/Message;)V A: $1
+    procedure onUnhandledInputEvent(view : JWebView; event : JInputEvent) ; cdecl;// (Landroid/webkit/WebView;Landroid/view/InputEvent;)V A: $1
+    procedure onUnhandledKeyEvent(view : JWebView; event : JKeyEvent) ; deprecated; cdecl;// (Landroid/webkit/WebView;Landroid/view/KeyEvent;)V A: $1
+    property ERROR_AUTHENTICATION : Integer read _GetERROR_AUTHENTICATION;      // I A: $19
+    property ERROR_BAD_URL : Integer read _GetERROR_BAD_URL;                    // I A: $19
+    property ERROR_CONNECT : Integer read _GetERROR_CONNECT;                    // I A: $19
+    property ERROR_FAILED_SSL_HANDSHAKE : Integer read _GetERROR_FAILED_SSL_HANDSHAKE;// I A: $19
+    property ERROR_FILE : Integer read _GetERROR_FILE;                          // I A: $19
+    property ERROR_FILE_NOT_FOUND : Integer read _GetERROR_FILE_NOT_FOUND;      // I A: $19
+    property ERROR_HOST_LOOKUP : Integer read _GetERROR_HOST_LOOKUP;            // I A: $19
+    property ERROR_IO : Integer read _GetERROR_IO;                              // I A: $19
+    property ERROR_PROXY_AUTHENTICATION : Integer read _GetERROR_PROXY_AUTHENTICATION;// I A: $19
+    property ERROR_REDIRECT_LOOP : Integer read _GetERROR_REDIRECT_LOOP;        // I A: $19
+    property ERROR_TIMEOUT : Integer read _GetERROR_TIMEOUT;                    // I A: $19
+    property ERROR_TOO_MANY_REQUESTS : Integer read _GetERROR_TOO_MANY_REQUESTS;// I A: $19
+    property ERROR_UNKNOWN : Integer read _GetERROR_UNKNOWN;                    // I A: $19
+    property ERROR_UNSUPPORTED_AUTH_SCHEME : Integer read _GetERROR_UNSUPPORTED_AUTH_SCHEME;// I A: $19
+    property ERROR_UNSUPPORTED_SCHEME : Integer read _GetERROR_UNSUPPORTED_SCHEME;// I A: $19
   end;
 
+  [JavaSignature('android/webkit/WebViewClient')]
+  JWebViewClient = interface(JObject)
+    ['{715D53CD-7668-42C8-A73A-28652068F0E8}']
+    function shouldInterceptRequest(view : JWebView; request : JWebResourceRequest) : JWebResourceResponse; cdecl; overload;// (Landroid/webkit/WebView;Landroid/webkit/WebResourceRequest;)Landroid/webkit/WebResourceResponse; A: $1
+    function shouldInterceptRequest(view : JWebView; url : JString) : JWebResourceResponse; deprecated; cdecl; overload;// (Landroid/webkit/WebView;Ljava/lang/String;)Landroid/webkit/WebResourceResponse; A: $1
+    function shouldOverrideKeyEvent(view : JWebView; event : JKeyEvent) : boolean; cdecl;// (Landroid/webkit/WebView;Landroid/view/KeyEvent;)Z A: $1
+    function shouldOverrideUrlLoading(view : JWebView; url : JString) : boolean; cdecl;// (Landroid/webkit/WebView;Ljava/lang/String;)Z A: $1
+    procedure doUpdateVisitedHistory(view : JWebView; url : JString; isReload : boolean) ; cdecl;// (Landroid/webkit/WebView;Ljava/lang/String;Z)V A: $1
+    procedure onFormResubmission(view : JWebView; dontResend : JMessage; resend : JMessage) ; cdecl;// (Landroid/webkit/WebView;Landroid/os/Message;Landroid/os/Message;)V A: $1
+    procedure onLoadResource(view : JWebView; url : JString) ; cdecl;           // (Landroid/webkit/WebView;Ljava/lang/String;)V A: $1
+    procedure onPageCommitVisible(view : JWebView; url : JString) ; cdecl;      // (Landroid/webkit/WebView;Ljava/lang/String;)V A: $1
+    procedure onPageFinished(view : JWebView; url : JString) ; cdecl;           // (Landroid/webkit/WebView;Ljava/lang/String;)V A: $1
+    procedure onPageStarted(view : JWebView; url : JString; favicon : JBitmap) ; cdecl;// (Landroid/webkit/WebView;Ljava/lang/String;Landroid/graphics/Bitmap;)V A: $1
+    procedure onReceivedClientCertRequest(view : JWebView; request : JClientCertRequest) ; cdecl;// (Landroid/webkit/WebView;Landroid/webkit/ClientCertRequest;)V A: $1
+    procedure onReceivedError(view : JWebView; errorCode : Integer; description : JString; failingUrl : JString) ; deprecated; cdecl; overload;// (Landroid/webkit/WebView;ILjava/lang/String;Ljava/lang/String;)V A: $1
+    procedure onReceivedError(view : JWebView; request : JWebResourceRequest; error : JWebResourceError) ; cdecl; overload;// (Landroid/webkit/WebView;Landroid/webkit/WebResourceRequest;Landroid/webkit/WebResourceError;)V A: $1
+    procedure onReceivedHttpAuthRequest(view : JWebView; handler : JHttpAuthHandler; host : JString; realm : JString) ; cdecl;// (Landroid/webkit/WebView;Landroid/webkit/HttpAuthHandler;Ljava/lang/String;Ljava/lang/String;)V A: $1
+    procedure onReceivedHttpError(view : JWebView; request : JWebResourceRequest; errorResponse : JWebResourceResponse) ; cdecl;// (Landroid/webkit/WebView;Landroid/webkit/WebResourceRequest;Landroid/webkit/WebResourceResponse;)V A: $1
+    procedure onReceivedLoginRequest(view : JWebView; realm : JString; account : JString; args : JString) ; cdecl;// (Landroid/webkit/WebView;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V A: $1
+    procedure onReceivedSslError(view : JWebView; handler : JSslErrorHandler; error : JSslError) ; cdecl;// (Landroid/webkit/WebView;Landroid/webkit/SslErrorHandler;Landroid/net/http/SslError;)V A: $1
+    procedure onScaleChanged(view : JWebView; oldScale : Single; newScale : Single) ; cdecl;// (Landroid/webkit/WebView;FF)V A: $1
+    procedure onTooManyRedirects(view : JWebView; cancelMsg : JMessage; continueMsg : JMessage) ; deprecated; cdecl;// (Landroid/webkit/WebView;Landroid/os/Message;Landroid/os/Message;)V A: $1
+    procedure onUnhandledInputEvent(view : JWebView; event : JInputEvent) ; cdecl;// (Landroid/webkit/WebView;Landroid/view/InputEvent;)V A: $1
+    procedure onUnhandledKeyEvent(view : JWebView; event : JKeyEvent) ; deprecated; cdecl;// (Landroid/webkit/WebView;Landroid/view/KeyEvent;)V A: $1
+  end;
+
+  TJWebViewClient = class(TJavaGenericImport<JWebViewClientClass, JWebViewClient>)
+  end;
+
+  end;
+
+  // Merged from: .\android.webkit.WebView_PictureListener.pas
+  JWebView_PictureListenerClass = interface(JObjectClass)
+    ['{FAB7369F-ABE6-490A-AE87-F97B4B9536AC}']
+    procedure onNewPicture(JWebViewparam0 : JWebView; JPictureparam1 : JPicture) ; deprecated; cdecl;// (Landroid/webkit/WebView;Landroid/graphics/Picture;)V A: $401
+  end;
+
+  [JavaSignature('android/webkit/WebView_PictureListener')]
+  JWebView_PictureListener = interface(JObject)
+    ['{BE3C8A84-AC49-46AA-9CBC-C340F503B27F}']
+    procedure onNewPicture(JWebViewparam0 : JWebView; JPictureparam1 : JPicture) ; deprecated; cdecl;// (Landroid/webkit/WebView;Landroid/graphics/Picture;)V A: $401
+  end;
+
+  TJWebView_PictureListener = class(TJavaGenericImport<JWebView_PictureListenerClass, JWebView_PictureListener>)
+  end;
+
+
 const
+  TJWebViewClientERROR_AUTHENTICATION = -4;
+  TJWebViewClientERROR_BAD_URL = -12;
+  TJWebViewClientERROR_CONNECT = -6;
+  TJWebViewClientERROR_FAILED_SSL_HANDSHAKE = -11;
+  TJWebViewClientERROR_FILE = -13;
+  TJWebViewClientERROR_FILE_NOT_FOUND = -14;
+  TJWebViewClientERROR_HOST_LOOKUP = -2;
+  TJWebViewClientERROR_IO = -7;
+  TJWebViewClientERROR_PROXY_AUTHENTICATION = -5;
+  TJWebViewClientERROR_REDIRECT_LOOP = -9;
+  TJWebViewClientERROR_TIMEOUT = -8;
+  TJWebViewClientERROR_TOO_MANY_REQUESTS = -15;
+  TJWebViewClientERROR_UNKNOWN = -1;
+  TJWebViewClientERROR_UNSUPPORTED_AUTH_SCHEME = -3;
+  TJWebViewClientERROR_UNSUPPORTED_SCHEME = -10;
+
   TJWebViewSCHEME_GEO = 'geo:0,0?q=';
   TJWebViewSCHEME_MAILTO = 'mailto:';
   TJWebViewSCHEME_TEL = 'tel:';

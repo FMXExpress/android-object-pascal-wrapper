@@ -10,7 +10,7 @@ uses
   Androidapi.JNI.JavaTypes,
   android.net.Uri,
   android.content.ContentValues,
-  android.content.ContentResolver;
+  android.content.ContentProvider;
 
 type
   JSearchRecentSuggestionsProvider = interface;

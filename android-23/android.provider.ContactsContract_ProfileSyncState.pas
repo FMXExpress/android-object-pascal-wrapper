@@ -9,7 +9,7 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   android.net.Uri,
-  android.content.ContentProviderClient,
+  android.content.ContentProvider,
   android.accounts.Account,
   android.util.Pair,
   android.content.ContentProviderOperation;

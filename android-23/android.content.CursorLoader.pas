@@ -10,7 +10,7 @@ uses
   Androidapi.JNI.JavaTypes,
   Androidapi.JNI.GraphicsContentViewText,
   android.net.Uri,
-  android.content.ContentResolver;
+  android.content.ContentProvider;
 
 type
   JCursorLoader = interface;

@@ -9,7 +9,6 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   junit.framework.Test,
-  junit.framework.TestListener,
   Androidapi.JNI.GraphicsContentViewText,
   android.app.Instrumentation;
 

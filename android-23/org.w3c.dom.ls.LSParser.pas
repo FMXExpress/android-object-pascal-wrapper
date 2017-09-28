@@ -10,7 +10,7 @@ uses
   Androidapi.JNI.JavaTypes,
   org.w3c.dom.DOMConfiguration,
   org.w3c.dom.ls.LSParserFilter,
-  org.w3c.dom.Document,
+  org.w3c.dom.Attr,
   org.w3c.dom.ls.LSInput;
 
 type

@@ -12,7 +12,7 @@ uses
   javax.net.ssl.SSLSocketFactory,
   android.net.SSLSessionCache,
   javax.net.ssl.TrustManager,
-  java.net.Socket,
+  java.net.DatagramSocket,
   javax.net.ssl.KeyManager,
   java.net.InetAddress;
 

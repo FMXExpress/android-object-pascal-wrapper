@@ -9,7 +9,6 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   android.view.ActionProvider,
-  android.view.SubMenu,
   android.content.ComponentName,
   android.content.ClipData,
   Androidapi.JNI.GraphicsContentViewText;

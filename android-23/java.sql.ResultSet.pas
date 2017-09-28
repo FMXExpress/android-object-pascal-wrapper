@@ -16,7 +16,6 @@ uses
   java.sql.Date,
   java.sql.ResultSetMetaData,
   java.sql.Ref,
-  java.sql.Connection,
   java.sql.Time,
   java.sql.Timestamp,
   java.net.URI,

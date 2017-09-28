@@ -11,11 +11,9 @@ uses
   Androidapi.JNI.os,
   java.net.InetAddress,
   javax.net.SocketFactory,
-  java.net.URLConnection,
   java.net.URI,
   java.net.Proxy,
-  java.net.DatagramSocket,
-  java.net.Socket;
+  java.net.DatagramSocket;
 
 type
   JNetwork = interface;

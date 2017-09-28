@@ -10,11 +10,11 @@ uses
   Androidapi.JNI.JavaTypes,
   java.util.Vector,
   junit.framework.AssertionFailedError,
-  junit.framework.TestListener,
-  junit.framework.TestCase,
   junit.framework.Protectable;
 
 type
+  JTestCase = interface; // merged
+  JTestListener = interface; // merged
   JTestResult = interface; // merged
   JTest = interface;
 
@@ -64,6 +64,58 @@ type
   end;
 
   TJTestResult = class(TJavaGenericImport<JTestResultClass, JTestResult>)
+  end;
+
+
+  // Merged from: .\junit.framework.TestListener.pas
+  JTestListenerClass = interface(JObjectClass)
+    ['{09581B08-C4E3-4E40-A582-A35CC6F9544C}']
+    procedure addError(JTestparam0 : JTest; JThrowableparam1 : JThrowable) ; cdecl;// (Ljunit/framework/Test;Ljava/lang/Throwable;)V A: $401
+    procedure addFailure(JTestparam0 : JTest; JAssertionFailedErrorparam1 : JAssertionFailedError) ; cdecl;// (Ljunit/framework/Test;Ljunit/framework/AssertionFailedError;)V A: $401
+    procedure endTest(JTestparam0 : JTest) ; cdecl;                             // (Ljunit/framework/Test;)V A: $401
+    procedure startTest(JTestparam0 : JTest) ; cdecl;                           // (Ljunit/framework/Test;)V A: $401
+  end;
+
+  [JavaSignature('junit/framework/TestListener')]
+  JTestListener = interface(JObject)
+    ['{87CF25A2-E669-469F-B2BF-965C5DCF5455}']
+    procedure addError(JTestparam0 : JTest; JThrowableparam1 : JThrowable) ; cdecl;// (Ljunit/framework/Test;Ljava/lang/Throwable;)V A: $401
+    procedure addFailure(JTestparam0 : JTest; JAssertionFailedErrorparam1 : JAssertionFailedError) ; cdecl;// (Ljunit/framework/Test;Ljunit/framework/AssertionFailedError;)V A: $401
+    procedure endTest(JTestparam0 : JTest) ; cdecl;                             // (Ljunit/framework/Test;)V A: $401
+    procedure startTest(JTestparam0 : JTest) ; cdecl;                           // (Ljunit/framework/Test;)V A: $401
+  end;
+
+  TJTestListener = class(TJavaGenericImport<JTestListenerClass, JTestListener>)
+  end;
+
+
+  // Merged from: .\junit.framework.TestCase.pas
+  JTestCaseClass = interface(JObjectClass)
+    ['{9A1C74FE-6CDB-40C9-896F-C73C2A622BC8}']
+    function countTestCases : Integer; cdecl;                                   // ()I A: $1
+    function getName : JString; cdecl;                                          // ()Ljava/lang/String; A: $1
+    function init : JTestCase; cdecl; overload;                                 // ()V A: $1
+    function init(&name : JString) : JTestCase; cdecl; overload;                // (Ljava/lang/String;)V A: $1
+    function run : JTestResult; cdecl; overload;                                // ()Ljunit/framework/TestResult; A: $1
+    function toString : JString; cdecl;                                         // ()Ljava/lang/String; A: $1
+    procedure run(result : JTestResult) ; cdecl; overload;                      // (Ljunit/framework/TestResult;)V A: $1
+    procedure runBare ; cdecl;                                                  // ()V A: $1
+    procedure setName(&name : JString) ; cdecl;                                 // (Ljava/lang/String;)V A: $1
+  end;
+
+  [JavaSignature('junit/framework/TestCase')]
+  JTestCase = interface(JObject)
+    ['{993B231A-3F71-4D57-BC40-2447E8C28071}']
+    function countTestCases : Integer; cdecl;                                   // ()I A: $1
+    function getName : JString; cdecl;                                          // ()Ljava/lang/String; A: $1
+    function run : JTestResult; cdecl; overload;                                // ()Ljunit/framework/TestResult; A: $1
+    function toString : JString; cdecl;                                         // ()Ljava/lang/String; A: $1
+    procedure run(result : JTestResult) ; cdecl; overload;                      // (Ljunit/framework/TestResult;)V A: $1
+    procedure runBare ; cdecl;                                                  // ()V A: $1
+    procedure setName(&name : JString) ; cdecl;                                 // (Ljava/lang/String;)V A: $1
+  end;
+
+  TJTestCase = class(TJavaGenericImport<JTestCaseClass, JTestCase>)
   end;
 
 

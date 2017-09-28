@@ -10,8 +10,7 @@ uses
   Androidapi.JNI.JavaTypes,
   Androidapi.JNI.os,
   Androidapi.JNI.GraphicsContentViewText,
-  android.content.ClipData,
-  android.content.IntentSender;
+  android.content.ClipData;
 
 type
   JPendingIntent_OnFinished = interface; // merged

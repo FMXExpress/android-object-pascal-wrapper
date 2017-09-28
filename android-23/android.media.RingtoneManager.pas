@@ -10,7 +10,7 @@ uses
   Androidapi.JNI.JavaTypes,
   android.app.Activity,
   Androidapi.JNI.GraphicsContentViewText,
-  android.content.ContentResolver,
+  android.content.ContentProvider,
   android.media.Ringtone,
   android.net.Uri;
 

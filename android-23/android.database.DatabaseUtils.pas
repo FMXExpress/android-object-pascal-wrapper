@@ -10,7 +10,7 @@ uses
   Androidapi.JNI.JavaTypes,
   Androidapi.JNI.os,
   android.database.sqlite.SQLiteProgram,
-  android.content.ContentResolver,
+  android.content.ContentProvider,
   android.content.ContentValues,
   android.database.DatabaseUtils_InsertHelper,
   android.database.DatabaseErrorHandler,

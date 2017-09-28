@@ -13,7 +13,6 @@ uses
   android.inputmethodservice.KeyboardView_OnKeyboardActionListener,
   android.inputmethodservice.Keyboard,
   android.graphics.Bitmap,
-  android.inputmethodservice.Keyboard_Key,
   android.view.MotionEvent;
 
 type

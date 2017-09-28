@@ -10,7 +10,6 @@ uses
   Androidapi.JNI.JavaTypes,
   android.content.ClipData,
   Androidapi.JNI.GraphicsContentViewText,
-  java.net.Socket,
   java.net.DatagramSocket,
   android.net.Network,
   Androidapi.JNI.os;

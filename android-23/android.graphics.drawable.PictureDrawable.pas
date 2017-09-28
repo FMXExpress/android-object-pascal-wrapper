@@ -8,7 +8,6 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  android.graphics.Picture,
   android.graphics.Bitmap,
   android.graphics.ColorFilter;
 

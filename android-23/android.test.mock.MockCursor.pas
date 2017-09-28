@@ -12,7 +12,7 @@ uses
   android.database.CharArrayBuffer,
   android.database.ContentObserver,
   android.database.DataSetObserver,
-  android.content.ContentResolver,
+  android.content.ContentProvider,
   android.net.Uri;
 
 type

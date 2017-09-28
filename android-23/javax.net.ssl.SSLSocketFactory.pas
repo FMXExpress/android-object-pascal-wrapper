@@ -9,7 +9,7 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   javax.net.SocketFactory,
-  java.net.Socket;
+  java.net.DatagramSocket;
 
 type
   JSSLSocketFactory = interface;

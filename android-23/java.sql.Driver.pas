@@ -8,7 +8,7 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  java.sql.Connection,
+  java.sql.Array,
   java.util.Properties,
   java.sql.DriverPropertyInfo;
 

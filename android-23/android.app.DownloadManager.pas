@@ -9,7 +9,7 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   android.app.DownloadManager_Request,
-  android.content.ContentResolver,
+  android.content.ContentProvider,
   android.app.DownloadManager_Query,
   Androidapi.JNI.os,
   android.net.Uri,

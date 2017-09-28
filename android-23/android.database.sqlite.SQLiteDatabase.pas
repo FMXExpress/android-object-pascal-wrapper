@@ -9,10 +9,9 @@ uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
   android.database.sqlite.SQLiteTransactionListener,
-  android.database.sqlite.SQLiteCursorDriver,
   android.database.DatabaseErrorHandler,
   android.database.sqlite.SQLiteStatement,
-  android.content.ContentResolver,
+  android.content.ContentProvider,
   Androidapi.JNI.os,
   android.content.ContentValues;
 

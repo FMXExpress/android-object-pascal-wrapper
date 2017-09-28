@@ -27,7 +27,6 @@ uses
   android.text.Editable_Factory,
   android.text.Spannable_Factory,
   android.widget.TextView_BufferType,
-  android.widget.TextView_OnEditorActionListener,
   android.text.InputFilter,
   android.graphics.Bitmap,
   android.graphics.Rect,
@@ -44,6 +43,7 @@ uses
   android.view.DragEvent;
 
 type
+  JTextView_OnEditorActionListener = interface; // merged
   JTextView = interface; // merged
   JMovementMethod = interface;
 
@@ -516,6 +516,22 @@ type
   end;
 
   TJTextView = class(TJavaGenericImport<JTextViewClass, JTextView>)
+  end;
+
+
+  // Merged from: .\android.widget.TextView_OnEditorActionListener.pas
+  JTextView_OnEditorActionListenerClass = interface(JObjectClass)
+    ['{64B600F6-CCB4-40D7-B4E3-4B9E112721C3}']
+    function onEditorAction(JTextViewparam0 : JTextView; Integerparam1 : Integer; JKeyEventparam2 : JKeyEvent) : boolean; cdecl;// (Landroid/widget/TextView;ILandroid/view/KeyEvent;)Z A: $401
+  end;
+
+  [JavaSignature('android/widget/TextView_OnEditorActionListener')]
+  JTextView_OnEditorActionListener = interface(JObject)
+    ['{6399814C-08F7-482A-B67E-B2A1BD7CDFA6}']
+    function onEditorAction(JTextViewparam0 : JTextView; Integerparam1 : Integer; JKeyEventparam2 : JKeyEvent) : boolean; cdecl;// (Landroid/widget/TextView;ILandroid/view/KeyEvent;)Z A: $401
+  end;
+
+  TJTextView_OnEditorActionListener = class(TJavaGenericImport<JTextView_OnEditorActionListenerClass, JTextView_OnEditorActionListener>)
   end;
 
 

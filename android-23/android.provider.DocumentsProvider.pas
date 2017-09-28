@@ -10,7 +10,7 @@ uses
   Androidapi.JNI.JavaTypes,
   Androidapi.JNI.GraphicsContentViewText,
   android.content.pm.ProviderInfo,
-  android.content.ContentResolver,
+  android.content.ContentProvider,
   Androidapi.JNI.os,
   android.content.res.AssetFileDescriptor,
   android.graphics.Point,

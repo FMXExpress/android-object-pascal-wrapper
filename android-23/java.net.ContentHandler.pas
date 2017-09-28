@@ -8,7 +8,7 @@ interface
 uses
   AndroidAPI.JNIBridge,
   Androidapi.JNI.JavaTypes,
-  java.net.URLConnection;
+  java.net.URI;
 
 type
   JContentHandler = interface;

@@ -15,7 +15,7 @@ uses
   android.content.DialogInterface_OnDismissListener,
   android.content.DialogInterface_OnKeyListener,
   android.widget.ListAdapter,
-  android.content.ContentResolver,
+  android.content.ContentProvider,
   android.content.DialogInterface_OnMultiChoiceClickListener,
   android.widget.AdapterView,
   android.app.AlertDialog;
