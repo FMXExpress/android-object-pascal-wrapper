@@ -22,7 +22,7 @@ type
     procedure onAuthenticationSucceeded(result : JFingerprintManager_AuthenticationResult) ; cdecl;// (Landroid/hardware/fingerprint/FingerprintManager$AuthenticationResult;)V A: $1
   end;
 
-  [JavaSignature('android/hardware/fingerprint/FingerprintManager_AuthenticationCallback')]
+  [JavaSignature('android/hardware/fingerprint/FingerprintManager$AuthenticationCallback')]
   JFingerprintManager_AuthenticationCallback = interface(JObject)
     ['{C75C8620-0152-4995-AB26-16AC4B8D6F65}']
     procedure onAuthenticationError(errorCode : Integer; errString : JCharSequence) ; cdecl;// (ILjava/lang/CharSequence;)V A: $1

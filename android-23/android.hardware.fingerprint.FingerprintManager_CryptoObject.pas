@@ -25,7 +25,7 @@ type
     function init(signature : JSignature) : JFingerprintManager_CryptoObject; cdecl; overload;// (Ljava/security/Signature;)V A: $1
   end;
 
-  [JavaSignature('android/hardware/fingerprint/FingerprintManager_CryptoObject')]
+  [JavaSignature('android/hardware/fingerprint/FingerprintManager$CryptoObject')]
   JFingerprintManager_CryptoObject = interface(JObject)
     ['{804419C9-7CAC-4A0D-A1D3-30E8417BD4AA}']
     function getCipher : JCipher; cdecl;                                        // ()Ljavax/crypto/Cipher; A: $1

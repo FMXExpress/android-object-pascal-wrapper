@@ -46,7 +46,7 @@ type
     property FINGERPRINT_ERROR_UNABLE_TO_PROCESS : Integer read _GetFINGERPRINT_ERROR_UNABLE_TO_PROCESS;// I A: $19
   end;
 
-  [JavaSignature('android/hardware/fingerprint/FingerprintManager$AuthenticationCallback')]
+  [JavaSignature('android/hardware/fingerprint/FingerprintManager')]
   JFingerprintManager = interface(JObject)
     ['{04739451-932D-41A8-8571-05BC3A739D32}']
     function hasEnrolledFingerprints : boolean; cdecl;                          // ()Z A: $1

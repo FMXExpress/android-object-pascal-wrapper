@@ -18,7 +18,7 @@ type
     function getCryptoObject : JFingerprintManager_CryptoObject; cdecl;         // ()Landroid/hardware/fingerprint/FingerprintManager$CryptoObject; A: $1
   end;
 
-  [JavaSignature('android/hardware/fingerprint/FingerprintManager_AuthenticationResult')]
+  [JavaSignature('android/hardware/fingerprint/FingerprintManager$AuthenticationResult')]
   JFingerprintManager_AuthenticationResult = interface(JObject)
     ['{30DB127D-540F-4F74-98E0-7983EF9F449A}']
     function getCryptoObject : JFingerprintManager_CryptoObject; cdecl;         // ()Landroid/hardware/fingerprint/FingerprintManager$CryptoObject; A: $1
