@@ -49,7 +49,7 @@ type
     property EXTRA_TAG : JString read _GetEXTRA_TAG;                            // Ljava/lang/String; A: $19
   end;
 
-  [JavaSignature('android/nfc/NfcAdapter$CreateBeamUrisCallback')]
+  [JavaSignature('android/nfc/NfcAdapter')]
   JNfcAdapter = interface(JObject)
     ['{F5E38CEF-58CB-458D-AFDE-4D0D6F56CE12}']
     function isEnabled : boolean; cdecl;                                        // ()Z A: $1

@@ -82,7 +82,7 @@ type
     property STATE_TURNING_ON : Integer read _GetSTATE_TURNING_ON;              // I A: $19
   end;
 
-  [JavaSignature('android/nfc/NfcAdapter$CreateBeamUrisCallback')]
+  [JavaSignature('android/nfc/NfcAdapter')]
   JNfcAdapter = interface(JObject)
     ['{66F533E6-4597-450D-90D6-0C4286077DCC}']
     function invokeBeam(activity : JActivity) : boolean; cdecl;                 // (Landroid/app/Activity;)Z A: $1
